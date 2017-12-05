@@ -1,0 +1,303 @@
+<section class="detail" ng-controller="vendordetailCtrl">
+
+	<div class="container">
+    	<div class="row">
+        	<div class="seg_cnt">
+                <div class="col-sm-7 detail_pc">
+                	<div class="graphy"> <img src=".//home/img/4.jpg" />
+                	
+                	<i class="fa fa-heart-o like" aria-hidden="true"></i>
+                	<i class="fa fa-share-alt share_edt" aria-hidden="true"></i>
+                	
+                	</div>
+                </div>
+                <div class="col-sm-5">
+                	<div class="studio">
+                        <h3> {{vendordetails.company_name}}</h3>
+                        <h4><i class="fa fa-map-marker" aria-hidden="true"></i>  {{vendordetails.location}} </h4>
+                        <h4><i class="fa fa-phone" aria-hidden="true"></i> {{vendordetails.country_code}} {{vendordetails.phone}}</h4>
+                            <ul class="stars">
+                               <li><i class="fa fa-star " aria-hidden="true"></i></li>
+                               <li><i class="fa fa-star " aria-hidden="true"></i></li>
+                               <li><i class="fa fa-star " aria-hidden="true"></i></li>
+                               <li><i class="fa fa-star " aria-hidden="true"></i></li>
+                               <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                               <li>(0 Reviews)</li>
+                              </ul>
+                              
+                              <div class="sve">
+          <a href="#" class="btn btn-default exp_btn" role="button"><i class="fa fa-bookmark-o" ></i> Save to my vendors</a>
+					<a href="#" class="btn btn-default exp_btn" role="button"><i class="fa fa-mobile"></i> Message</a>
+                              </div>
+                              
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div><!--container-->
+    
+    
+    <div class="container">
+    
+    <div class="tab_detail">
+    
+    	<div class="row">
+        	<div class="col-sm-9">
+            
+<main>
+ 
+      <input id="tab1" type="radio" name="tabs" checked>
+      <label for="tab1">info</label>
+        
+      <input id="tab2" type="radio" name="tabs">
+      <label for="tab2">portfolio</label>
+        
+      <input id="tab3" type="radio" name="tabs">
+      <label for="tab3">reviews</label>
+        
+      <input id="tab4" type="radio" name="tabs">
+      <label for="tab4">map</label>
+      
+      <input id="tab5" type="radio" name="tabs">
+      <label for="tab5">deals</label>
+
+    
+  <section id="content1" class="sec_edt">
+    <div class="seg_cnt process abt">
+    <h3>About Us</h3>
+    	<p style="color:#999;" >
+            {{vendordetails.about_us}}
+        </p>
+        <p style="color:#999;" ng-if="vendordetails.about_us == ''">
+            No Details
+        </p>
+    </div>
+    
+     <div class="seg_cnt process abt">
+     	<h3>Basic Info</h3>
+        
+        <div class="lab">
+        	<h4>established in</h4>
+            <span> {{ vendordetails.establishment_year}}</span>
+            <span ng-if="vendordetails.establishment_year == ''"> No details</span>
+        </div>
+         <div class="lab">
+        	<h4>Twitter</h4>
+            <span> {{ vendordetails.twitter_username}}</span>
+            <span ng-if="vendordetails.twitter_username == ''"> No details</span>
+        </div> <div class="lab">
+        	<h4>Facebook</h4>
+            <span> {{ vendordetails.facebook_username}}</span>
+            <span ng-if="vendordetails.facebook_username == ''"> No details</span>
+        </div> <div class="lab">
+        	<h4>instagram</h4>
+            <span> {{ vendordetails.instagram_username}}</span>
+            <span ng-if="vendordetails.instagram_username == ''"> No details</span>
+        </div>
+        
+<!--        <div class="lab">
+        	<h4>payment mode</h4>
+            <span>cash</span>
+        </div>
+        
+         <div class="lab">
+        	<h4>budget</h4>
+            <span>rs 10,000 onwards</span>
+        </div>
+        
+         <div class="lab">
+        	<h4>album type</h4>
+            <span>photobook album</span>
+        </div>
+        
+         <div class="lab">
+        	<h4>photography style</h4>
+            <span>1965</span>
+        </div>
+        
+         <div class="lab">
+        	<h4>more info</h4>
+            <span>wedding poster provided and t-shirt photo available</span>
+        </div> -->
+        
+     </div>
+     
+     <div class="seg_cnt process abt">
+     	<h3>budget details</h3>
+        <div class="col-sm-6" ng-repeat="addon in vendordetails.additional_addon">
+            	<div class="bud">
+                	<h3> {{addon.title}}</h3>
+                    <span>{{addon.price}}</span>
+                </div>
+        </div>
+<!--        <div class="col-sm-6" ng-repeat="addon in vendordetails.additional_highlights">
+            	<div class="bud">
+                	<h3> {{addon.title}}</h3>
+                    <span>{{addon.price}}</span>
+                </div>
+        </div>-->
+<!--            <div class="col-sm-6">
+            	<div class="bud">
+                	<h3>candid</h3>
+                    <span>Rs 20,000 onwards</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+            	<div class="bud">
+                	<h3>pre wedding videography</h3>
+                    <span>Rs 10,000 per function</span>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+            	<div class="bud">
+                	<h3>traditional photography</h3>
+                    <span>Rs 20,000 onwards</span>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+            	<div class="bud">
+                	<h3>videography</h3>
+                    <span>Rs 15000</span>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+            	<div class="bud">
+                	<h3>cinematography</h3>
+                    <span>Rs 40,000 onwards</span>
+                </div>
+            </div>-->
+            
+        </div>
+        
+        <div class="seg_cnt process abt">
+     	<h3>our services</h3>
+            <div class="col-sm-4" ng-repeat='service in vendordetails.services'>
+            	<div class="service_bud">
+                	<h3><i class="fa fa-check-circle" aria-hidden="true"></i>personalised gifts</h3>
+                </div>
+            </div>
+<!--            <div class="col-sm-4">
+            	<div class="service_bud">
+                	<h3><i class="fa fa-times-circle" aria-hidden="true"></i>Studio setup provided</h3>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            	<div class="service_bud">
+                	<h3><i class="fa fa-check-circle" aria-hidden="true"></i>shoots for outdoor</h3>
+                </div>
+            </div>
+            
+            <div class="col-sm-4">
+            	<div class="service_bud">
+                	<h3><i class="fa fa-times-circle" aria-hidden="true"></i>video editing</h3>
+                </div>
+            </div>
+            
+            <div class="col-sm-4">
+            	<div class="service_bud">
+                	<h3><i class="fa fa-check-circle" aria-hidden="true"></i>photography for wedding</h3>
+                </div>
+            </div>
+            
+            <div class="col-sm-4">
+            	<div class="service_bud">
+                	<h3><i class="fa fa-times-circle" aria-hidden="true"></i>videography</h3>
+                </div>
+            </div>-->
+            
+        </div>
+     
+    
+  </section>
+    
+  <section id="content2" class="sec_edt">
+     <div class="col-sm-12">
+        <!-- Projects Row -->
+        <div class="row" ng-repeat="image in vendordetails.gallery_image">
+            <div class="col-md-3 col-sm-6 col-xs-12 portfolio-item">
+                <a href="#" class="dumb">
+                    <img class="" ng-src="{{image.image}}" alt="">
+                    <img class="" ng-src="{{image}}" alt="">
+                </a>
+            </div>
+        </div>
+        <!-- /.row -->
+       
+    </div>
+  </section>
+    
+  <section id="content3" class="sec_edt">
+<!--    <div class="container">
+        <div class="row">
+            <div class="col-sm-1 col-xs-3">
+            <div class="thumbnail">
+            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+            </div> /thumbnail 
+            </div> /col-sm-1 
+            
+            <div class="col-sm-5 col-xs-6">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+            </div>
+            <div class="panel-body">
+            Panel content
+            </div> /panel-body 
+            </div> /panel panel-default 
+            </div> /col-sm-5 
+        </div> /row 
+    </div>-->
+  </section>
+    
+  <section id="content4" class="sec_edt">
+    <div class="mp" #map id="map">
+          	<!--<img src=".//home/img/map.jpg">-->
+    </div>
+  </section>
+  
+  <section id="content5" class="sec_edt">
+    <p>
+       Amount : {{vendordetails.discount_amount}}
+    </p>
+    <p>
+        Effective Date: {{vendordetails.effective_date}}
+    </p>
+    <p>
+      Details: {{vendordetails.product_detail}} </p>
+  </section>
+    
+</main>
+            
+            </div>
+            <div class="col-sm-3">
+            	<div class="seg_cnt process enquiry">
+                	<h3 style="text-transform:capitalize;font-weight:700;font-size:20px;">send enquiry to photographer</h3>
+                    <p style="color:#ccc;">Fill in your details and a photographer specialist will get back to you shortly</p>
+                    <form>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email Address">
+                      </div>
+                      <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Phone Number">
+                      </div>
+					  
+					  <div class="form-group">
+                        <input type="date" class="form-control" placeholder="Wedding Date">
+                      </div>
+                      
+                      <button type="submit" class="btn btn-default exp_btn styled filt_apply">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    	
+    </div><!--tab_detail-->
+	
+</div>
+</section>

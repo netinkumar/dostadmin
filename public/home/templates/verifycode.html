@@ -1,0 +1,33 @@
+<section class="segment"  ng-controller="VerifyCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <center>
+                    <div class='title'>
+                        <h3>Verification</h3>
+                        <p> Please enter the verification code below :  </p>
+                    </div><br>
+                    <div class=" cust_tab" style="width:50%;">
+                        <div class="alert alert-success" ng-if="success_msg">
+                            <strong>Success!</strong> {{success_msg}}
+                        </div>
+
+                        <div class="alert alert-danger" ng-if="error_msg">
+                            <strong>Error!</strong> {{error_msg}}
+                        </div>
+                        <div class="tab-pane" id="profile" role="tabpanel">
+
+                            <form class="log">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" ng-model='data.code' id="exampleInputEmail1" placeholder="Code">
+                                </div>
+                                <center><button type="submit" class="btn btn-default exp_btn styled sub" styled ng-click="verify()">Submit</button></center>
+
+                            </form>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+</section>

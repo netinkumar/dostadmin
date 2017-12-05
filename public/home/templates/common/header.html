@@ -1,0 +1,168 @@
+<section class="top-nav-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand"><img src="/home/img/logo.png" /></a>
+        </div>
+        </div>
+     
+      <div class="col-sm-6">
+        <div class="top-detail text-right">
+          <ul>
+            <li ng-if="!currentUser"><a href="/signup_user">Register/Login</a></li>
+           <li ng-if="currentUser" class="dropdown drp_edt">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/editbasicinfo">Profile</a></li>
+                <li><a href="/changepassword">Change Passowrd</a></li>
+                <li ng-controller='ForgetCtrl' ng-click="logout();"><a >Logout</a></li>
+              </ul>
+            </li>
+            <li class="search-btn search-icon text-center"> <a href="#"><form id="demo-2">
+	<input type="search" placeholder="Search">
+</form></a> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--row--> 
+  </div>
+</section>
+
+<!--customer_megamenu start-->
+<section class="cus_menu">
+  <div class="container">
+    <nav class="navbar navbar-inverse no-margin">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      </div>
+      <div class="collapse navbar-collapse js-navbar-collapse no-padding">
+        <ul class="nav navbar-nav">
+          <li><a href="/" class="fst">home</a></li>
+          
+          <!--about list-->
+          <li class="dropdown mega-dropdown"> 
+            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"> about us <i class="fa fa-angle-down" aria-hidden="true"></i> </a>-->
+            <a href="/aboutus" class="dropdown-toggle" > about us  </a>
+            <!--<ul class="dropdown-menu mega-dropdown-menu">
+              <li class="col-sm-6">
+                <ul>
+                  <li><a href="#">lorem2</a></li>
+                  <li><a href="#">lorem3</a></li>
+                  <li><a href="#">lorem4</a></li>
+                  <li><a href="#">lorem5</a></li>
+                </ul>
+              </li>
+            </ul>-->
+          </li>
+          <!--about list end--> 
+          
+          <!--vendor list-->
+          <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> vendors <i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+            <ul class="dropdown-menu mega-dropdown-menu" ng-controller="commonCtrl">
+              <li class="col-sm-6" >
+                <ul>
+                  <li><a href="/list?id=all">All</a></li>
+                  <li><a ng-repeat="type in allvendortypes1" href="{{type.link}}">{{type.title}}</a></li>
+                </ul>
+              </li>
+              <li class="col-sm-6">
+                <ul>
+                   <li><a ng-repeat="type in allvendortypes2" href="{{type.link}}">{{type.title}}</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <!--vendor list end--> 
+          
+          <!--venue list-->
+          <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> venue <i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+            <ul class="dropdown-menu mega-dropdown-menu">
+              <li class="col-sm-12">
+                <ul>
+                  <li><a href="#">Delhi NCR</a></li>
+                  <li><a href="#">Mumbai</a></li>
+                  <li><a href="#">Chandigarh</a></li>
+                  <li><a href="#">Kolkata</a></li>
+                  <li><a href="#">Chennai</a></li>
+                  <li><a href="#">Bhubaneswar</a></li>
+                </ul>
+              </li>
+              <!--<li class="col-sm-6">
+                <ul>
+                  <li><a href="#">lorem7</a></li>
+                  <li><a href="#">lorem8</a></li>
+                  <li><a href="#">lorem9</a></li>
+                  <li><a href="#">lorem10</a></li>
+                </ul>
+              </li>-->
+            </ul>
+          </li>
+          <!--venue list end--> 
+          
+          <!--planner list-->
+          <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> planner <i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+            <ul class="dropdown-menu mega-dropdown-menu">
+              <li class="col-sm-12">
+                <ul>
+                  <li><a href="#">Wedding Planners near you</a></li>
+                  <li><a href="#">Try DOST!</a></li>
+                </ul>
+              </li>
+              <!--<li class="col-sm-6">
+                <ul>
+                  <li><a href="#">lorem7</a></li>
+                  <li><a href="#">lorem8</a></li>
+                  <li><a href="#">lorem9</a></li>
+                  <li><a href="#">lorem10</a></li>
+                </ul>
+              </li>-->
+            </ul>
+          </li>
+          <!--planner list end-->
+          
+          <li><a href="#">ask ramu (Coming soon!)</a></li>
+          
+          <!--post a job list-->
+          <li ng-if="currentUser" class="dropdown mega-dropdown"> <a href="/postjob" > post a job </a>
+          <li ng-if="!currentUser"  class="dropdown mega-dropdown"> <a href="/signin" > post a job </a>
+            
+          </li>
+          <!--post a job list end--> 
+          
+          <!--shaddi times list-->
+          <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> shaddi times <i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+            <ul class="dropdown-menu mega-dropdown-menu">
+              <li class="col-sm-12">
+                <ul>
+                  <li><a href="#">Real Wedding Photos</a></li>
+                  <li>
+                    <a href="#">Shaadi Diaries</a>
+                    <ul>
+                      <li><a href="#"> DOST Shaadi Diaries</a></li>
+                      <li><a href="#"> Publish Shaadi Diaries</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+             
+            </ul>
+          </li>
+          <!--shaddi times list end-->
+          
+        </ul>
+      </div>
+      <!-- /.nav-collapse --> 
+    </nav>
+  </div>
+</section>
+<!--customer_megamenu end--> 
+
+<div class="social_scroll">
+	<ul>
+    	<li><a><img src="/home/img/fb.png" /></a></li>
+        <li><a><img src="/home/img/tw.png" /></a></li>
+        <li><a><img src="/home/img/ins.png" /></a></li>
+    </ul>
+</div>

@@ -1,0 +1,105 @@
+<section class="segment" ng-controller="VendorSignupCtrl">
+    <div class="container">
+    	<div class="row">
+        	<div class="col-sm-8 col-sm-offset-2">
+            
+                            
+                
+            
+            	<div class="seg_cnt">
+                <h1 class="styled exp_usr">Vendors</h1>
+                <!-- Tab panes -->
+                <div class="cust_tab">
+                    <form class="log" name="register" ng-submit="submitted && signup_vendor()" novalidate>
+                  	    
+                <div class="form-group">
+                  <h5 class="base">Vendor Type </h5>
+                    <select ng-model="user.vendor_type" name="vendorType" class="form-control typ" id="sel1">
+                          <option value="Photographer">Photographer</option>
+                          <option value="Bridal Wear">Bridal Wear</option>
+                          <option value="Wedding Decorator">Wedding Decorator</option>
+                          <option value="Make Up">Make up</option>
+                          <option value="Wedding Planner">Wedding Planner</option>
+                          <option value="Groomwear">Groomwear</option>
+                          <option value="Wedding Cards">Wedding Cards</option>
+                          <option value="Mehndi Artist">Mehndi Artist</option>
+                          <option value="Wedding Entertainment">Wedding Entertainment</option>
+                          <option value="Wedding Cake">Wedding Cake</option>
+                          <option value="Wedding Jewellery">Wedding Jewellery</option>
+                          <option value="Wedding Catering">Wedding Catering</option>
+                          <option value="Wedding Accessories">Wedding Accessories</option>
+                          <option value="Sangeet Choreographer">Sangeet Choreographer</option>
+                          <option value="Wedding Venue">Wedding Venue</option>
+                    </select>
+                </div>
+                  	    
+                     <div class="form-group">
+                         <input type="text" class="form-control" name="companyName" ng-model="user.company_name" placeholder="Company Name" required>
+                      </div>
+                    
+                    <!--<div class="form-group">
+                        <input type="text" class="form-control" name="Name" ng-model="user.name" placeholder="Username" required>
+                      </div>-->
+                    
+                      <!--<div class="form-group">
+                        <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Email" required>
+                         <a class="close_item" ng-show="register.email.$touched && register.email.$invalid">Invalid email</a>
+                      </div>-->
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password" required>
+                      </div>
+                       <div class="form-group">
+                        <input type="password" class="form-control" name="ConfirmPassword" ng-model="user.cpassword" placeholder="Confirm Password" required>
+
+                      </div>
+                      
+                      <div class="form-group">
+                        <input type="number" class="form-control" name="phone" ng-model="user.phone" placeholder="Phone Number" required>
+                        <a class="close_item" ng-show="register.phone.required">Please enter a phone number</a>
+                        <a class="close_item" ng-show="register.phone.$touched && register.phone.$error.number">Invalid number</a>
+                      </div>
+                      
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="address" ng-model="user.address" placeholder="Address" required>
+                      </div>
+                      
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="location" ng-model="user.location" placeholder="Location" >
+                      </div>
+                      
+                      <div class="form-group">
+                        <h5 class="base">How Did You Find About Us</h5>
+                        <select class="form-control typ" id="sel1" name="find_us" ng-model="user.find_us">
+                              <!--<option selected></option>-->
+                              <option value='Friends'>Friends</option>
+                              <option value='Friends of Friends'>Friends of Friends</option>
+                              <option value='Social Media'>Social Media</option>
+                        </select>
+                      </div>
+                      
+                  <center>
+                    <center>
+                      <div class="alert alert-danger" ng-if="err == '1'">
+                        <strong>Error : </strong> {{message}} {{pass_msg}}
+                      </div>
+                       <div class="alert alert-success" ng-if="success_msg">
+                        <strong>Success!</strong> {{success_msg}}
+                    </div>
+
+                    <div class="alert alert-danger" ng-if="error_msg">
+                        <strong>Error!</strong> {{error_msg}}
+                    </div>
+                    </center>
+                      <input type="submit" name="submit" value="Sign Up" ng-click='submitted = true' class="btn btn-default exp_btn styled sub"/>
+                      <!--<a ui-href="vendor_process.html" type="submit" class="btn btn-default exp_btn styled sub" styled>sign up</a></center>-->
+                     
+                    </form>
+                    
+                  	<a href="/signin" class="already">Already have an account? <span> SIGN IN</span></a>
+                    
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</section>

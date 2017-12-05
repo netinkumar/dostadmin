@@ -1,0 +1,59 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Vendor Type
+            <small>Vendor Type - 1</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin/dashboard#/FaqList"><i class="fa fa-dashboard"></i> Vendor Type</a></li>
+            <li class="active">Add Vendor Type</li>
+        </ol>
+    </section>
+    <section class="content">
+
+
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add Vendor Type</h3>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-success" ng-show="message">
+                            <strong ng-bind="message" ></strong> 
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <div class="alert alert-success" ng-if="success_msg">
+                            <strong>Success!</strong> {{success_msg}}
+                    </div>
+
+                    <div class="alert alert-danger" ng-if="error_msg">
+                            <strong>Error!</strong> {{error_msg}}
+                    </div>
+                    <form role="form" ng-submit="addVendorType()">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" class="form-control" name='title' ng-model='post.title' required="" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="box-body">
+                          <label> Allow user to add custom 'Vendor Subtype' under this vendor type :
+                               <input type="checkbox" ng-model="post.others"  name='multiple'> 
+                          </label>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="submit" name="submit" value="Add Post" class='btn btn-primary'>                   
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,954 @@
+<section class="segment" style="padding-top: 20px;" ng-controller="editbasicinfoCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <form class="log prs" name='register' ng-submit="vendor_process()" novalidate>
+                    <div class="form-group">
+                        <h3 class="base">Vendor Type</h3>
+                        <select ng-model="user.vendor_type" name="vendorType" ng-change="changevendor(user.vendor_type)" class="form-control typ"
+                            id="sel1">
+                          <option value="Photographer">Photographer</option>
+                          <option value="Bridal Wear">Bridal Wear</option>
+                          <option value="Wedding Decorator">Wedding Decorator</option>
+                          <option value="Make up">Make up</option>
+                          <option value="Wedding Planner">Wedding Planner</option>
+                          <option value="Groomwear">Groomwear</option>
+                          <option value="Wedding Cards">Wedding Cards</option>
+                          <option value="Mehndi Artist">Mehndi Artist</option>
+                          <option value="Wedding Entertainment">Wedding Entertainment</option>
+                          <option value="Wedding Cake">Wedding Cake</option>
+                          <option value="Wedding Jewellery">Wedding Jewellery</option>
+                          <option value="Wedding Catering">Wedding Catering</option>
+                          <option value="Wedding Accessories">Wedding Accessories</option>
+                          <option value="Sangeet Choreographer">Sangeet Choreographer</option>
+                    </select>
+                    </div>
+                   <h3 class="base"> Personal Info</h3>
+                    <div class="seg_cnt process">
+                        <div class="invt">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                 <input type="text" class="form-control" ng-model="user.phone" name="phone" placeholder="Phone number" >
+                                  <input type="text" class="form-control" ng-model="user.address" name="address" placeholder="Address" >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="user.company_name" name="company_name" placeholder="Company Name" >
+                                <input type="text" class="form-control" ng-model="user.location" name="location" placeholder="Location" >                                
+                            </div>
+                        </div>
+                        </div>
+                        <div class="invt">
+
+                        </div>
+                    </div>
+                    <h3 class="base">Basic info</h3>
+                    <div class="seg_cnt process">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea type="text" ng-model="user.about_us" name="about_us" class="form-control txtarea" placeholder="About Us " ></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="user.establishment_year" name="establishment_year" placeholder="Establishment Year" >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="user.start_hours" name="start_hours" placeholder="Start Hours (9:00 Am)" >
+                                <!--<input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime">-->
+                                <input type="text" class="form-control" ng-model="user.end_hours" name="end_hours" placeholder="Closing Hours (6:30 Pm)" >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <img style="position:absolute;bottom: 5px;" src="/home/img/mail.png" />
+                                <input style="padding-left:40px;" ng-model="user.email" type="email" name="email" class="form-control"
+                                    placeholder="Primary email * (abc@gmail.com)" >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <img style="position:absolute;bottom: 5px;" src="/home/img/fb.png" />
+                                <input style="padding-left:40px;" ng-model="user.facebook_username" type="text" name="facebook_username" class="form-control"
+                                    placeholder="https://www.facebook.com/theartidote/" >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <img style="position:absolute;bottom: 5px;" src="/home/img/tw.png" />
+                                <input style="padding-left:40px;" type="text" class="form-control" ng-model="user.twitter_username" name="twitter_username"
+                                    placeholder="https://twitter.com/"> </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <img style="position:absolute;bottom: 5px;" src="/home/img/ins.png" />
+                                <input style="padding-left:40px;" type="text" ng-model="user.instagram_username" name="instagram_username" class="form-control"
+                                    placeholder="https://www.instagram.com/?hl=en">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="user.awards" name="awards" placeholder="Awards & Recognition">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--seg_cnt-->
+
+                    <!--<h3 class="base">Invite friends</h3>
+                    <div class="seg_cnt process">
+                        <div class="invt">
+                            <div class="col-sm-3"><a class="link" href="{{fb_link}}" target="_blank"><img src="/home/img/linka.png" /></a></div>
+                            <div class="col-sm-3"><a class="link" href='{{google_link}}' target="_blank"><img src="/home/img/linkb.png" /></a></div>
+                            <div class="col-sm-3"><a class="link"><img src="/home/img/linkc.png" /></a></div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="invt">
+                            <h3 class="sub_head">Download</h3>
+                            <div class="col-sm-2"><a class="link"><img width="130px;" src="/home/img/playstore.png" /></a></div>
+                            <div class="col-sm-2"><a class="link"><img width="130px;" src="/home/img/appstore.png" /></a></div>
+                        </div>
+                    </div>-->
+                    <!--seg_cnt-->
+                    <h3 class="base">Service and cost details</h3>
+                    <!--wedding venue starts-->
+                    <div class="seg_cnt process" ng-if="vendor_type=='Wedding Venue'">
+                        <h3 class="sub_head">Wedding Venue</h3>
+                        <table class="data" id="photo_video_table">
+                            <thead>
+                                <tr>
+                                    <th class='title'>Basic Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="inpt" >
+                                     <input type="hidden" ng-model="user.service[0].title" ng-init="user.service[0].title='Basic Info'"
+                                            readonly class="" >
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].type" ng-init="user.service[0].type='Minimum Guests'"
+                                            readonly class="" placeholder="Minimum Guests"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[0].min_guests" class="" placeholder="No. of Guests"></td>
+                                </tr>
+                                <tr class="inpt" >
+                                     <input type="hidden" ng-model="user.service[1].title" ng-init="user.service[1].title='Basic Info'"
+                                            readonly class="" ></td>
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[1].type" ng-init="user.service[1].type='Maximum Guests'"
+                                            readonly class="" placeholder="Maximum Guests"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[1].max_guests" class="" placeholder="No. of Guests"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <table class="data" id="photo_video_table">
+                            <thead>
+                                <tr>
+                                    <th class='title'>Starting price per plate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="inpt" >
+                                      <input type="hidden" ng-model="user.service[2].title" ng-init="user.service[2].title='Starting price per plate'"
+                                            readonly class="" >
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[2].type" ng-init="user.service[2].type='Vegetarian'"
+                                            readonly class="" placeholder="Vegetarian"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[2].vegetarian" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                                <tr class="inpt" ><input type="hidden" ng-model="user.service[3].title" ng-init="user.service[3].title='Starting price per plate'"
+                                            readonly class="" ></td>
+                                    <!--<td data-label="" class="title main_title">Price per Hour</td>-->
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[3].type" ng-init="user.service[3].type='Non-Vegetarian'"
+                                            readonly class="" placeholder="Non-Vegetarian"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[3].non_vegetarian" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="data" id="photo_video_table">
+                            <thead>
+                                <tr>
+                                    <th class='title'>Price per day</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="inpt" >
+                                    <input type="hidden" ng-model="user.service[4].title" ng-init="user.service[4].title='Price per day'"
+                                            readonly class="" >
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[4].type" ng-init="user.service[4].type='Vegetarian'"
+                                            readonly class="" placeholder="Vegetarian"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[4].vegetarian" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                            
+                                <tr class="inpt" ng-repeat="(index,field) in fields">
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].price" class="" placeholder="Price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="styled" type='button' ng-click="additionalservices()" >Add more</button>
+                        <!-- <a class="btn btn-info more_btn" id="photo_video_btn" href="javascript:void(0)" role="button">Add More</a>-->
+                        <div class="addon">
+                            <div class="col-sm-6">
+                                <h3 class="sub_head">Add-ons6:</h3>
+                                <ul class="gf-checkbox hd_chk">
+                                    <li>
+                                        <input type="checkbox" id="sound_addon" name='sound_addon'  ng-click="check($event, 'sound_addon')"/>
+                                        <label for="checkbox-1">Sound System</label>
+                                        <input type="number" class="default_hide" ng-model='groom.sound_addon' placeholder="Price"  name="sound_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lighting_addon" ng-click="check($event, 'lighting_addon')"/>
+                                        <label for="checkbox-2">Lighting</label>
+                                        <input type="number" class="default_hide" ng-model="groom.lighting_addon" placeholder="Price" name="lighting_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="security_addon" ng-click="check($event, 'security_addon')"/>
+                                        <label for="checkbox-3">Security</label>
+                                        <input type="number" class="default_hide" ng-model="groom.security_addon" placeholder="Price" name="security_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cocktail_addon" ng-click="check($event, 'cocktail_addon')"/>
+                                        <label for="checkbox-4">Cocktail Services</label>
+                                        <input type="number" class="default_hide" placeholder="Price" ng-model="groom.cocktail_addon" name="cocktail_addon_price" />
+                                    </li>
+                                    <li ng-repeat="(index,field) in moreAddon6">
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="" ng-model='moreAddon6[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">others</label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="number" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                    
+                                    
+                                </ul>
+                                 <button class="default_hide styled" type='button' ng-click="add_addon()" id='add_button'>Add</button>
+                            </div>
+                            <div class="col-sm-6 discount">
+                                <h3 class="sub_head">Discount</h3>
+                                <select  id="cusSelectbox"  ng-model="discount" ng-change="showDiscountOption(discount)" class="soflow discount_select">
+                               <option value="2">2 Days</option>
+                                <option value="custom">Customize</option>
+                            </select>
+                            
+                             <input ng-if='showdiscount == 1' type="text" ng-model='disc.title' name="discount_title" class="default_hide" placeholder="Enter title"/>
+                             <input ng-if='custom_dis == 1' type="text" ng-model='disc.days' name="discount_days" class="default_hide" placeholder="Enter days"/>
+                             <input ng-if='showdiscount == 1' type="number" ng-model='disc.amount' name="discount_price" class="default_hide" placeholder="Enter amount" />
+                             <button class="styled" ng-if='showdiscount == 1' type='button' ng-click="save_discount()"> Add </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- photographer ends -->
+                    <!--Wedding venue ends-->
+                    <!--Photography starts-->
+                    <div class="seg_cnt process" ng-if="vendor_type=='Photographer'">
+                        <h3 class="sub_head">Photography & Videography</h3>
+                        <table class="data" id="photo_video_table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="title">Photo</th>
+                                    <th class="title">Video</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="inpt" >
+                                    <!--                          <td data-label="" class="title main_title">Price per Hour</td>-->
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Price per Hour'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[0].photo" class="" placeholder="Enter Amount"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].video" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                                <!--<tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.per_day[1].title" ng-init="user.per_day[1].title='Price per Day'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.per_day[1].photo" name="photo_per_hour" class="" placeholder="Enter Amount"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.per_day[1].video" name="video_per_hour" class="" placeholder="Enter Amount"></td>
+                                </tr>-->
+                                <tr class="inpt" ng-repeat="(index,field) in fields" ng-if="vendor_type == 'Photographer'">
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.additionalservice[index].photo" class="" placeholder="Enter Amount"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].video" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                                <tr class="inpt" ng-repeat="(index,field) in fields" ng-if="vendor_type == 'Bridal Wear'">
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.additionalservice[index].type" class="" placeholder="Outfit type"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].price" class="" placeholder="Price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="styled add-more" type='button' ng-click="additionalservices()" >Add more</button>
+                        <!-- <a class="btn btn-info more_btn" id="photo_video_btn" href="javascript:void(0)" role="button">Add More</a>-->
+                        <div class="addon">
+                            <div class="col-sm-6">
+                                <h3 class="sub_head">Add-ons:</h3>
+                                <ul class="gf-checkbox hd_chk">
+                                    <li>
+                                        <input type="checkbox" id="candid_addon" name='candid_addon' value='candid' ng-click="check($event, 'candid')"/><label for="checkbox-1">Candid</label>
+                                        <input type="text" class="" ng-model='groom.candid' placeholder="Price"  name="candid_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="video_addon" ng-click="check($event, 'video_editing')"/><label for="checkbox-2">Video Editing</label>
+                                        <input type="text" class="" ng-model="groom.video_editing" placeholder="Price" name="video_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="photo_addon" ng-click="check($event, 'photo_book')"/><label for="checkbox-3">photo book</label>
+                                        <input type="text" class="" ng-model="groom.photo_book" placeholder="Price" name="photo_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="portrait_addon" ng-click="check($event, 'portrait')"/><label for="checkbox-4">portrait & framing</label>
+                                        <input type="text" class="" placeholder="Price" ng-model="groom.portrait" name="portrait_price" />
+                                    </li>
+                                    <li ng-repeat="(index,field) in moreAddon">
+                                        <input type="checkbox" class="" placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="text" class="" ng-model='moreAddon[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">more</label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="text" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                    
+                                    
+                                </ul>
+                                 <button class="default_hide styled" type='button' ng-click="add_addon()" id='add_button'>Add</button>
+                            </div>
+                            <div class="col-sm-6 discount">
+                                <h3 class="sub_head">Discount</h3>
+                                <select  id="cusSelectbox"  ng-model="discount" ng-change="showDiscountOption(discount)" class="soflow discount_select soflow">
+                               <option value="2">2 Days</option>
+                                <option value="custom">Customize</option>
+                            </select>
+                             <input ng-if='showdiscount == 1' type="text" ng-model='disc.title' name="discount_title" class="default_hide" placeholder="Enter title"/>
+                             <input ng-if='custom_dis == 1' type="text" ng-model='disc.days' name="discount_days" class="default_hide" placeholder="Enter days"/>
+                             <input ng-if='showdiscount == 1' type="number" ng-model='disc.amount' name="discount_price" class="default_hide" placeholder="Enter amount" />
+                             <button class="styled" ng-if='showdiscount == 1' type='button' ng-click="save_discount()"> Add </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- photographer ends -->
+
+                    <!-- starts Bridal/ groomwear / Mehandi/ sangeet,wedding/cakes/favours/makeup / accessory/ jewellery starts-->
+                    <div class="seg_cnt process" ng-if="vendor_type =='Bridal Wear' ||  vendor_type == 'Wedding Catering' ||  vendor_type == 'Make up' ||  vendor_type == 'Groomwear' || vendor_type == 'Wedding Accessories' || vendor_type == 'Wedding Jewellery'">
+                        <h3 class="sub_head"> {{vendor_type}}</h3>
+                         <!-- make up starts -->
+                        <table class="data" id="photo_video_table" ng-if="vendor_type =='Make up'">
+                            <thead>
+                                <tr>
+                                    <th class="title">Title</th>
+                                    <th class="title">Bridal</th>
+                                    <th class="title">Family</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr class="inpt">
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Price per event'" readonly class="" placeholder="Enter Title">
+                                    </td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[0].bridal" class="" placeholder="Enter Amount"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].family" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                                <tr class="inpt" ng-repeat="(index,field) in fields" >
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.additionalservice[index].bridal" class="" placeholder="Enter Amount"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].family" class="" placeholder="Enter Amount"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <!-- make up ends -->
+
+                        <!-- bridal starts -->
+                        <table class="data" id="photo_video_table" ng-if="vendor_type =='Bridal Wear' || vendor_type =='Groomwear'">
+                            <thead>
+                                <tr>
+                                    <th class="title">Title</th>
+                                    <th class="title">Outfit</th>
+                                    <th class="title">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Price per piece'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[0].type" class="" placeholder="Outfit type"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].price" class="" placeholder="Price"></td>
+                                </tr>
+                                <tr class="inpt" ng-repeat="(index,field) in fields" >
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.additionalservice[index].type" class="" placeholder="Outfit type"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].price" class="" placeholder="Price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                          <!-- bridal ends -->
+                     <!-- catering starts -->
+                        <table class="data" id="photo_video_table" ng-if="vendor_type =='Wedding Catering'">
+                            <thead>
+                                <tr>
+                                    <th class="title">Title</th>
+                                    <th class="title">Starter</th>
+                                    <th class="title">Main course</th>
+                                    <th class="title">Dessert</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Per plate starting'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.service[0].starter" class="" placeholder="Enter price"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].main_course" class="" placeholder="Enter price"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].dessert" class="" placeholder="Enter price"></td>
+                                </tr>
+                                 <tr class="inpt" ng-repeat="(index,field) in fields" >
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Photo"><input type="text" ng-model="user.additionalservice[index].starter" class="" placeholder="Enter price"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].main_course" class="" placeholder="Enter price"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].dessert" class="" placeholder="Enter price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                          <!-- catering ends -->
+                         <!-- decorator/planner starts -->
+                        <table class="data" id="photo_video_table" ng-if="vendor_type =='Wedding Decorator' || vendor_type =='Wedding Planner'">
+                            <thead>
+                                <tr>
+                                    <th class="title">Title</th>
+                                    <th class="title">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Starting Price'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].price" class="" placeholder="Price"></td>
+                                </tr>
+                                <tr class="inpt" ng-repeat="(index,field) in fields" >
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].price" class="" placeholder="Price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <!-- decorator/planner ends -->
+                         <!--jewellery / accesory start-->
+                         <table class="data" id="photo_video_table" ng-if="vendor_type =='Wedding Jewellery' || vendor_type =='Wedding Accessories'">
+                            <thead>
+                                <tr>
+                                    <th class="title">Title</th>
+                                    <th class="title">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Starting Price'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].price" class="" placeholder="Price"></td>
+                                </tr>
+                                <tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[1].title" ng-init="user.service[1].title='Per piece'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[1].price" class="" placeholder="Price"></td>
+                                </tr>
+                                <tr class="inpt" ng-repeat="(index,field) in fields" >
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].price" class="" placeholder="Price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <!-- jewellery ends-->
+                        <button class="styled" type='button' ng-click="additionalservices()">Add more</button>
+                        <div class="addon">
+                            <!-- make up starts-->
+                             <div class="col-sm-6" ng-if="vendor_type == 'Make up'">
+                                <h3 class="sub_head">Add-ons1:</h3>
+                                <ul class="gf-checkbox hd_chk">
+                                    <li>
+                                        <input type="checkbox"  id='air_addon' ng-click="check($event, 'air_addon')" />
+                                        <label>Air Brush</label>
+                                        <input type="number" class="default_hide" ng-model='groom.air_addon' placeholder="Price" name="air_addon_price" />
+                                    </li>
+                                   
+                                    <li>
+                                        <input type="checkbox" id='travel_addon' ng-click="check($event, 'travel_addon')" />
+                                        <label > Travel </label>
+                                        <input type="number" class="default_hide" ng-model='groom.travel_addon' placeholder="Price" name="travel_addon_price" />
+                                    </li>
+                                    <li ng-repeat="(index,field) in moreAddon1">
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="default_hide" ng-model='moreAddon1[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                     <li>
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">More</label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="number" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                </ul>
+                                 <button class="default_hide styled" type='button' ng-click="add_addon()" id='add_button'>Add</button>
+                            </div>
+                            <!--make up ends-->
+                            <!--wedding catering starts-->
+                              <div class="col-sm-6" ng-if="vendor_type == 'Wedding Catering'">
+                                <h3 class="sub_head">Add-ons5:</h3>
+                                <ul class="gf-checkbox hd_chk" >
+                                    <li>
+                                        <input type="checkbox"  id='nonveg_addon' ng-click="check($event, 'non_veg')" />
+                                        <label>Non-veg</label>
+                                        <input type="number" class="" ng-model='groom.nonveg_addon' placeholder="Price" name="nonveg_addon_price" />
+                                    </li>
+                                   
+                                    <li>
+                                        <input type="checkbox" id='healthy_addon' ng-click="check($event, 'healthy_addon')" />
+                                        <label > Healthy </label>
+                                        <input type="number" class="" ng-model='groom.healthy_addon' placeholder="Price" name="healthy_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='hallal_addon' ng-click="check($event, 'hallal_addon')" />
+                                        <label > Hallal </label>
+                                        <input type="number" class="" ng-model='groom.hallal_addon' placeholder="Price" name="hallal_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='onion_addon' ng-click="check($event, 'onion_addon')" />
+                                        <label > W/O Onion </label>
+                                        <input type="number" class="" ng-model='groom.onion_addon' placeholder="Price" name="onion_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='garlic_addon' ng-click="check($event, 'garlic_addon')" />
+                                        <label > W/O Garlic </label>
+                                        <input type="number" class="" ng-model='groom.garlic_addon' placeholder="Price" name="garlic_addon_price" />
+                                    </li>
+                                    <li ng-repeat="(index,field) in moreAddon5" >
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox" >{{field.title}}</label>
+                                        <input type="number" class="default_hide" ng-model='moreAddon5[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                     <li>
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">More</label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="number" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                </ul>
+                                 <button class="default_hide styled" type='button' ng-click="add_addon()" id='add_button'>Add</button>
+                            </div>
+                            <!--weding catering ends-->
+                            <div class="col-sm-6" ng-if="vendor_type == 'Wedding Jewellery' || vendor_type == 'Wedding Accessories'">
+                                <h3 class="sub_head">Add-ons3:</h3>
+                                <ul class="gf-checkbox hd_chk">
+                                    <li>
+                                        <input type="checkbox"  id='delivery1_addon' ng-click="check($event, 'delivery1_addon')" />
+                                        <label>Delivery</label>
+                                        <input type="number" class="default_hide" ng-model='groom.delivery1_addon' placeholder="Price" name="delivery1_addon_price" />
+                                    </li>
+                                   
+                                    <li>
+                                        <input type="checkbox" id='demo_addon' ng-click="check($event, 'demo_addon')" />
+                                        <label > In-house Demo </label>
+                                        <input type="number" class="default_hide" ng-model='groom.demo_addon' placeholder="Price" name="demo_addon_price" />
+                                    </li>
+                                     <li>
+                                        <input type="checkbox" id='design_addon' ng-click="check($event, 'design_addon')" />
+                                        <label > Design & Customization </label>
+                                        <input type="number" class="default_hide" ng-model='groom.design_addon' placeholder="Price" name="design_addon_price" />
+                                    </li>
+                                    <li ng-repeat="(index,field) in moreAddon3">
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="default_hide" ng-model='moreAddon3[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                     <li>
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">More</label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="number" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                </ul>
+                                 <button class="default_hide styled" type='button' ng-click="add_addon()" id='add_button'>Add</button>
+                            </div>
+                            <!--bridal/ groomwear-->
+                            <div class="col-sm-6" ng-if="vendor_type == 'Bridal Wear' || vendor_type == 'Groomwear'"> 
+                                <h3 class="sub_head">Add-ons4:</h3>
+                                <ul class="gf-checkbox hd_chk">
+                                    <li>
+                                        <input type="checkbox"  id='delivery_addon' ng-checked="{{delivery_addon_check}}" ng-click="check($event, 'delivery_addon')" />
+                                        <label>Delivery</label>
+                                        <input type="number" class="" ng-model='groom.delivery_addon' placeholder="Price" name="delivery_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='inhouse_addon' ng-click="check($event, 'inhouse_addon')" />
+                                        <label >In-house viewing</label>
+                                        <input type="number" class="" ng-model='groom.inhouse_addon' placeholder="Price" name="inhouse_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='tailoring_addon' ng-click="check($event, 'tailoring_addon')" />
+                                        <label >Tailoring</label>
+                                        <input type="number" class="" ng-model='groom.tailoring_addon' placeholder="Price" name="tailoring_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='designing_addon' ng-click="check($event, 'designing_addon')" />
+                                        <label > Designing</label>
+                                        <input type="number" class="" ng-model='groom.designing_addon' placeholder="Price" name="designing_addon_price" />
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id='maching_addon' ng-click="check($event, 'maching_addon')" />
+                                        <label >Matching</label>
+                                        <input type="number" class="" ng-model='groom.maching_addon' placeholder="Price" name="maching_addon_price" />
+                                    </li>
+                                    <li ng-repeat="(index,field) in moreAddon4">
+                                        <input type="checkbox" class="" placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="" ng-model='moreAddon4[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                     <li>
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">Add more</label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="number" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                </ul>
+                                 <button class="default_hide styled" type='button' ng-click="add_addon('moreAddon4')" id='add_button'>Add</button>
+                            </div>
+                            
+                            <div class="col-sm-6 discount">
+                                <h3 class="sub_head">Discount</h3>
+                                <select  id="cusSelectbox"  ng-model="discount" ng-change="showDiscountOption(discount)" class="soflow discount_select">
+                               <option value="2" selected>2 Days</option>
+                                <option value="custom">Customize</option>
+                            </select>
+                            <button class="styled" ng-if='showdiscount != 1' type='button' ng-click="showOption()"> Edit </button>
+                             <input ng-if='showdiscount == 1' type="text" ng-model='disc.title' name="discount_title" class="default_hide" placeholder="Enter title"/>
+                             <input ng-if='custom_dis == 1' type="text" ng-model='disc.days' name="discount_days" class="default_hide" placeholder="Enter days"/>
+                             <input ng-if='showdiscount == 1' type="number" ng-model='disc.amount' name="discount_price" class="default_hide" placeholder="Enter amount" />
+                             <button class="styled" ng-if='showdiscount == 1' type='button' ng-click="save_discount()"> Add </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ends Bridal/ groomwear / Mehandi/ sangeet,wedding cards/cakes/favours/makeup / accessory/ jewellery ends-->
+                    <!-- decorator / planner starts-->
+                    <div class="seg_cnt process" ng-if="vendor_type =='Wedding Planner' || vendor_type =='Wedding Decorator' || vendor_type =='Sangeet Choreographer' || vendor_type =='Wedding Cards' || vendor_type =='Wedding Entertainment' ||  vendor_type == 'Mehandi Artist' ||  vendor_type== 'Wedding Cake' ">
+                        <h3 class="sub_head"> {{vendor_type}}</h3>
+                        <table class="data" id="photo_video_table">
+                            <thead>
+                                <tr>
+                                    <th class="title">Title</th>
+                                    <th class="title">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr class="inpt">
+                                    <td data-label="" class="title main_title"><input type="text" ng-model="user.service[0].title" ng-init="user.service[0].title='Starting Price'"
+                                            readonly class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.service[0].price" class="" placeholder="Price"></td>
+                                </tr>
+                                <tr class="inpt" ng-repeat="(index,field) in fields" >
+                                    <td data-label="" class="title main_title">
+                                    <input type="text" ng-model="user.additionalservice[index].title" class="" placeholder="Enter Title"></td>
+                                    <td data-label="Video"><input type="text" ng-model="user.additionalservice[index].price" class="" placeholder="Price"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--<button type='button' ng-click="additionalservices()" >Add more</button>-->
+                        <div class="addon">
+                            <div class="col-sm-6">
+                                <h3 class="sub_head">Add-ons2:</h3>
+                                <ul class="gf-checkbox hd_chk" >
+                                    <li ng-repeat="(index,field) in moreAddon2" >
+                                        <input type="checkbox"  placeholder="Title" ng-checked="true" ng-click="check($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="" ng-model='moreAddon2[index].price' ng-value='field.price' placeholder="Price"  />
+                                    </li>
+                                     <li >
+                                        <input type="checkbox" id="addon_more" name='addon_more'/><label for="checkbox-5">Add </label>
+                                        <input type="text" class="default_hide" ng-model="data.more_title" placeholder="Title" name="more_title" />
+                                        <input type="number" class="default_hide" ng-model="data.more_price" placeholder="Price" name="more_price" />
+                                    </li>
+                                </ul>
+                                 <button  class="default_hide styled" type='button' ng-click="add_addon()" id='add_button'>Add</button>
+                            </div>
+                            <div class="col-sm-6 discount">
+                                <h3 class="sub_head">Discount</h3>
+                                <select  id="cusSelectbox"  ng-model="discount" ng-change="showDiscountOption(discount)" class="soflow discount_select">
+                               <option value="2" selected>2 Days</option>
+                                <option value="custom">Customize</option>
+                            </select>
+                            <button class="styled" ng-if='showdiscount != 1' type='button' ng-click="showOption()"> Edit </button>
+                             <input ng-if='showdiscount == 1' type="text" ng-model='disc.title' name="discount_title" class="default_hide" placeholder="Enter title"/>
+                             <input ng-if='custom_dis == 1' type="text" ng-model='disc.days' name="discount_days" class="default_hide" placeholder="Enter days"/>
+                             <input ng-if='showdiscount == 1' type="number" ng-model='disc.amount' name="discount_price" class="default_hide" placeholder="Enter amount" />
+                             <button class="styled" ng-if='showdiscount == 1' type='button' ng-click="save_discount()"> Add </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- decorators/ planners ends-->
+                  
+                   
+                    <!--seg_cnt-->
+                    <h3 class="base">Special highlights</h3>
+                    <div class="seg_cnt process">
+                        <div class="high">
+                             <!--wedding venue-->
+                            <ul class="gf-checkbox" ng-if="vendor_type == 'Wedding Venue'">
+                                <li>
+                                    <input type="checkbox" id="pool_high" ng-click="check_high($event, 'pool_high')"/>
+                                    <label for="checkbox-6">Pool side</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.pool_high' placeholder="Price" name="pool_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="outdoor_high" ng-click="check_high($event, 'outdoor_high')" />
+                                    <label for="checkbox-7" >Outdoor</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.outdoor_high' placeholder="Price" name="outdoor_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="nearcity_high"  ng-click="check_high($event, 'nearcity_high')"/>
+                                    <label for="checkbox-8">Near City</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.nearcity_high' placeholder="Price" name="nearcity_high_price" />
+                                </li>
+                                 <li>
+                                    <input type="checkbox" id="nearaiport_high" ng-click="check_high($event, 'nearaiport_high')" />
+                                    <label for="checkbox-9" >Near Airport</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.nearaiport_high' placeholder="Price" name="nearaiport_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="bar_high" ng-click="check_high($event, 'bar_high')" />
+                                    <label for="checkbox-9" >Alcohol / Bar</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.bar_high' placeholder="Price" name="bar_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="mandap_high" ng-click="check_high($event, 'mandap_high')" />
+                                    <label for="checkbox-9" >Decoration / Mandap / Flowers</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.mandap_high' placeholder="Price" name="mandap_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="dj_high" ng-click="check_high($event, 'dj_high')" />
+                                    <label for="checkbox-9" >In-house DJ / Music</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.dj_high' placeholder="Price" name="dj_high_price" />
+                                </li>
+                                <li ng-repeat="(index,field) in moreHigh">
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check_high($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="default_hide" ng-model='moreHigh[index].price' ng-value='field.price' placeholder="Price"  />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-10" /><label for="checkbox-10">more</label>
+                                </li>
+                                <li>
+                                    <input type="text" class='default_hide' id="title_addon" name='title_addon' ng-model="data1.more_title" placeholder="Enter title"/>
+                                    <input type="text" class='default_hide' id="price_addon" name='price_addon' ng-model="data1.more_price" placeholder="Enter price"/>
+                                </li>
+                                <button  class='default_hide styled' id='high_button' type='button' ng-click="add_highlight()"> Add </button>
+                            </ul>
+                            <!-- venue -->
+                            <!--photographer-->
+                            <ul class="gf-checkbox" ng-if="vendor_type == 'Photographer'">
+                                <li>
+                                    <input type="checkbox" id="checkbox-6" name='candid_high' ng-click="check_high($event, 'candid_high')"/><label for="checkbox-6">Candid</label>
+                                    <input type="text" class="" ng-model='bridal.candid_high' placeholder="Price" name="candid_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-7" ng-click="check_high($event, 'videoediting_high')" /><label for="checkbox-7" >Video Editing</label>
+                                    <input type="text" class="" ng-model='bridal.videoediting_high' placeholder="Price" name="videoediting_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-8"  ng-click="check_high($event, 'photobook_high')"/><label for="checkbox-8">photo book</label>
+                                    <input type="text" class="" ng-model='bridal.photobook_high' placeholder="Price" name="photobook_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-9" ng-click="check_high($event, 'portrait_high')" /><label for="checkbox-9" >portrait & framing</label>
+                                    <input type="text" class="" ng-model='bridal.portrait_high' placeholder="Price" name="portrait_high_price" />
+                                </li>
+                                <li ng-repeat="(index,field) in moreHigh">
+                                        <input type="checkbox" class="" placeholder="Title" ng-checked="true" ng-click="check_high($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="" ng-model='moreHigh[index].price' ng-value='field.price' placeholder="Price"  />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-10" /><label for="checkbox-10">more</label>
+                                </li>
+                                <li>
+                                    <input type="text" class='default_hide' id="title_addon" name='title_addon' ng-model="data1.more_title" placeholder="Enter title"/>
+                                    <input type="text" class='default_hide' id="price_addon" name='price_addon' ng-model="data1.more_price" placeholder="Enter price"/>
+                                </li>
+                                <button  class='default_hide styled' id='high_button' type='button' ng-click="add_highlight()"> Add </button>
+                            </ul>
+                            <!--Photographer ends-->
+
+                             <!-- HIGHLIGHTS starts Bridal/ groomwear / Mehandi/ sangeet,wedding cards/cakes/favours/makeup / accessory/ jewellery -->
+                             <ul class="gf-checkbox" ng-if="vendor_type =='Bridal Wear' || vendor_type == 'Wedding Cards' || vendor_type == 'wedding favours' ||  vendor_type == 'Make up' ||  vendor_type == 'Groomwear'||  vendor_type== 'Wedding Cake' ||   vendor_type == 'Mehandi Artist' ||  vendor_type =='Wedding Entertainment' || vendor_type == 'Wedding Accessories' || vendor_type == 'Wedding Jewellery' || vendor_type == 'Sangeet Choreographer'">
+                                <li>
+                                    <input type="checkbox" id="travel_high" name='travel' value='travel' ng-click="check_high($event, 'travel')" />
+                                    <label  for="checkbox-1a">Travel</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.travel1' placeholder="Price" name="travel_price"/>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="bulkdisc_travel" name='bulkdisc_travel' value='bulkdisc_travel' ng-click="check_high($event, 'bulkdisc_travel')"
+                                    /><label for="checkbox-2a">Bulk Discount</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.bulkdisc_travel' placeholder="Price" name="bulkdisc_travel_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="home_delivery" name='home_delivery' value='home_delivery' ng-click="check_high($event, 'home_delivery')"
+                                    /><label for="checkbox-3a">Delivery to Home</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.home_delivery' placeholder="Price" name="home_delivery_price" />
+                                </li>
+                                 <li>
+                                    <input type="checkbox" id="design" name='design' value='design' ng-click="check_high($event, 'design')"
+                                    /><label for="checkbox-4a">Design and Customization</label>
+                                    <input type="number" class="default_hide" ng-model='bridal.design' placeholder="Price" name="design_price" />
+                                </li>
+                                <li ng-repeat="(index,field) in moreHigh">
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check_high($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="default_hide" ng-model='moreHigh[index].price' ng-value='field.price' placeholder="Price"  />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-10" /><label for="checkbox-10">more</label>
+                                </li>
+                                <li>
+                                    <input type="text" class='default_hide' id="title_addon" name='title_addon' ng-model="data1.more_title" placeholder="Enter title"/>
+                                    <input type="text" class='default_hide' id="price_addon" name='price_addon' ng-model="data1.more_price" placeholder="Enter price"/>
+                                </li>
+                                <button  class='default_hide styled' id='high_button' type='button' ng-click="add_highlight()"> Add </button>
+                            </ul>
+                            <!--HIGHLIGHTS ends  Bridal/ groomwear / Mehandi/ sangeet,wedding cards/cakes/favours/makeup / accessory/ jewellery HIGHLIGHTS ends-->
+                            <!--Decorator/planner -->
+                            <ul class="gf-checkbox" ng-if="vendor_type == 'Wedding Decorator' || vendor_type == 'Wedding Planner'">
+                                <li>
+                                    <input type="checkbox" id='theme_high' ng-checked="true" ng-click="check_high($event, 'theme_high')"/><label >Theme Wedding</label>
+                                    <input type="number" class="" ng-model='bridal.theme_high' placeholder="Price" name="theme_high_price" />
+                                </li>
+                                <li ng-repeat="(index,field) in moreHigh">
+                                        <input type="checkbox"  placeholder="Title" ng-checked="true" ng-click="check_high($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="" ng-model='moreHigh[index].price' ng-value='field.price' placeholder="Price"  />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-10" /><label for="checkbox-10">more</label>
+                                </li>
+                                <li>
+                                    <input type="text" class='default_hide' id="title_addon" name='title_addon' ng-model="data1.more_title" placeholder="Enter title"/>
+                                    <input type="text" class='default_hide' id="price_addon" name='price_addon' ng-model="data1.more_price" placeholder="Enter price"/>
+                                </li>
+                                <button  class='default_hide styled' id='high_button' type='button' ng-click="add_highlight()"> Add </button>
+                            </ul>
+                            <!--Decorator/planner ends-->
+
+                             <!--wedding catering -->
+                            <ul class="gf-checkbox" ng-if="vendor_type == 'Wedding Catering'">
+                                <li>
+                                    <input type="checkbox" id='continental_high' ng-click="check_high($event, 'continental_high')"/>
+                                    <label >Continental </label>
+                                    <input type="number" class="default_hide" ng-model='bridal.continental_high' placeholder="Price" name="continental_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id='healthy_high' ng-click="check_high($event, 'healthy_high')"/>
+                                    <label >Healthy </label>
+                                    <input type="number" class="default_hide" ng-model='bridal.healthy_high' placeholder="Price" name="healthy_high_price" />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id='allergy_high' ng-click="check_high($event, 'allergy_high')"/>
+                                    <label >Customize to allergy/restriction </label>
+                                    <input type="number" class="default_hide" ng-model='bridal.allergy_high' placeholder="Price" name="allergy_high_price" />
+                                </li>
+                                <li ng-repeat="(index,field) in moreHigh">
+                                        <input type="checkbox" class="default_hide" placeholder="Title" ng-checked="true" ng-click="check_high($event, field.title)" />
+                                        <label for="checkbox">{{field.title}}</label>
+                                        <input type="number" class="default_hide" ng-model='moreHigh[index].price' ng-value='field.price' placeholder="Price"  />
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="checkbox-10" /><label for="checkbox-10">other</label>
+                                </li>
+                                <li>
+                                    <input type="text" class='default_hide' id="title_addon" name='title_addon' ng-model="data1.more_title" placeholder="Enter title"/>
+                                    <input type="text" class='default_hide' id="price_addon" name='price_addon' ng-model="data1.more_price" placeholder="Enter price"/>
+                                </li>
+                                <button  class='default_hide styled' id='high_button' type='button' ng-click="add_highlight()"> Add </button>
+                            </ul>
+                            <!--wedding catering ends-->
+
+
+                            <div class="gallery">
+                                <h3 class="sub_head">Gallery</h3>
+                                <div ng-repeat="(index,field) in gallary">
+                                    <div class="image-container">
+                                        <span class="closee" ng-click="removeImage(index)"> &times;</span>
+                                        <img src="{{field.image}}" style="width:100px;float:left" alt="">
+                                    </div>
+                                </div>
+                                  <div class="col-sm-2" ng-if="loading == true;">
+                                        <h3 class="sub_head">Uploading....</h3>
+                                  </div>
+                                <div class="col-sm-2" ng-if="loading == false;">
+                                    <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" onchange="angular.element(this).scope().uploadFile(this)"/>
+                                    <label for="file"><i class="fa fa-picture-o image_upld"></i><span>Upload image</span></label>
+                                </div>
+                            </div>
+                            <!--gallery-->
+                            <h3 class="sub_head">Link with</h3>
+                            <a class="btn btn-info info_btn" href="#" role="button">Paytm</a>
+                        </div>
+                        <!--high-->
+                    </div>
+                    <!--seg_cnt-->
+                    <h3 class="base">location</h3>
+                    <div class="location">
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <input type="text" id='mapSearchInput' class="form-control" ng-model="user.location" id="exampleInputEmail1" placeholder="Enter Location" >
+                            <button id="getCords" type='button' ng-click="codeAddress();" class="fa fa-search styled" aria-hidden="true"></button>
+                        </div>
+                        <div><span id='mapErrorMsg'></span></div>
+                        <div class="mp" #map id="map" >
+                            <!--<img src="/home/img/map.jpg" />-->
+                        </div>
+
+                    </div>
+
+                    <h3 class="base">deals</h3>
+                    <div class="seg_cnt process">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea type="text" class="form-control txtarea" ng-model='user.deals.pro_details' placeholder="Product Details"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model='user.deals.effect_date'  placeholder="Effective Date">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model='user.deals.amount'  placeholder="Discount Amount">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--seg_cnt-->
+                    <div class="alert alert-success" ng-if="success_msg">   
+                        {{success_msg}}
+                    </div>
+                    <button type="submit" class="btn btn-default exp_btn styled pub" name="submit" ng-disabled="register.$invalid" value="Publish"> Publish </button>
+                    <!--<a href="index.html" class="btn btn-default exp_btn styled pub" role="button">Publish</a>-->
+                </form>
+            </div>
+            <!--col-sm-12-->
+        </div>
+        <!--row-->
+    </div>
+    <!--container-->
+</section>
+<script>    
+ $(function(){
+                $('#time').combodate({
+                    firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+                    minuteStep: 1
+                });  
+            });
+</script>

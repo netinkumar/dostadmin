@@ -1,0 +1,137 @@
+<section class="segment" style="padding-top: 20px;" ng-controller="vendorlistCtrl">
+  <div class="container">
+    <div class="row" ng-if="noresult == 0">
+      <div class="cust_sort">
+        <h3 class="base edit_bse" ng-if="vendor_name"> {{vendor_name}}</h3>
+        <span>
+          <select name="" id="cusSelectbox">
+              <option value="Select">Sort By</option>
+              <option value="three">Reviews</option>
+              <option value="seven">Ratings</option>
+              <option value="ten">Popularity</option>
+          </select> 
+        </span>
+      </div>
+
+      <div class="col-sm-3" ng-if="noresult == 0 && vendor_name!= 'All vendors'">
+        <div class="seg_cnt process">
+          <div class="todo todo_b">
+            <ul class="accordion">
+              <li>
+                <!--li start-->
+                <a class="icn">Price/day</a>
+                <div>
+                  <ul class="gf-checkbox cust_check">
+                    <li>
+                      <input type="checkbox" id="checkbox-1" /><label for="checkbox-1"><span> < 60k </span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-2" /><label for="checkbox-2"><span>< 60k - 1Lac </span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-3" /><label for="checkbox-3"><span>1Lac - 1.5Lacs </span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-4" /><label for="checkbox-4"><span> >1.5Lac </span></label>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <!--li end-->
+
+              <li>
+                <!--li start-->
+                <a class="icn">Core Speciality</a>
+                <div>
+                  <ul class="gf-checkbox cust_check">
+                    <li>
+                      <input type="checkbox" id="checkbox-5" /><label for="checkbox-5"><span>Candid Specialist</span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-6" /><label for="checkbox-6"><span>Traditional and Candid Specialist</span></label>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <!--li end-->
+
+              <li>
+                <!--li start-->
+                <a class="icn">Average Rattings</a>
+                <div>
+                  <ul class="gf-checkbox cust_check">
+                    <li>
+                      <input type="checkbox" id="checkbox-7" /><label for="checkbox-7"><span>All Ratings</span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-8" /><label for="checkbox-8"><span>Rated 3.0+</span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-9" /><label for="checkbox-9"><span>Rated 4.0+</span></label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="checkbox-10" /><label for="checkbox-10"><span>Rated 5.0</span></label>
+                    </li>
+                  </ul>
+
+                </div>
+              </li>
+              <!--li end-->
+
+            </ul>
+            <!-- / accordion -->
+            <a href="#" class="btn btn-default exp_btn styled filt_apply" role="button">Apply</a>
+          </div>
+
+        </div>
+      </div>
+      <!--col-sm-4-->
+      <div class="col-sm-9">
+        <div class="list">
+          <div class="row">
+            <div class="col-sm-4" ng-repeat="vendor in vendorlist">
+              <div class="thumbnail nail">
+                <div class="list_pc"><img src="/home/img/4.jpg" alt="..."></div>
+                <div class="caption thumb">
+                  <a ng-click="vendorDetails(vendor.vendor_type,vendor._id)"> {{vendor.company_name}}</a>
+                  <a ng-click="vendorDetails(vendor.vendor_type,vendor._id)"> {{vendor.vendor_type}} </a>
+                  <ul class="stars">
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <!--<li><i class="fa fa-star active" aria-hidden="true"></i></li>-->
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                  </ul>
+                  <dl class="price">
+                    <dt>Rs 165,000 onwards</dt>
+                    <dd>0 reviews</dd>
+                  </dl>
+                  <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{vendor.location}}</span>
+                </div>
+              </div>
+              <!--nail_end-->
+            </div>
+            <!--col-sm-4-->
+          </div>
+          <!--row-->
+        </div>
+        <!--list-->
+      </div>
+      <!--col-sm-9-->
+    </div>
+    <!--row-->
+      <div class="row" ng-if="noresult == 1">
+          <div class="cust_sort">
+        <h3 class="base edit_bse"> {{message}}</h3>
+          </div>
+      </div>
+  </div>
+  <!--container-->
+</section>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+  <script src="js/jquery.bxslider.min.js"></script>-->
