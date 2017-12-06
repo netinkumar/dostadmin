@@ -12,9 +12,9 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
      */
     $scope.user = {};
     $scope.user = {
-        vendor_type: 'Photographer',
         find_us: 'Friends'
     }
+    $scope.data = {};
     $scope.message = '';
     $scope.err = '0';
     $scope.pass_msg = '';
@@ -86,9 +86,20 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
     })
     // 
 
-   
+    $scope.getallvendortypes = function(){
+        Vendortypes.all().then(function(res){
+            console.log(res);
+            $rootScope.allvendortypes = res.data;
+            $scope.data.vendor_type = $rootScope.allvendortypes[0]._id+'-'+$rootScope.allvendortypes[0].title
+        })
+    }
+    $scope.getallvendortypes();
     $scope.signup_vendor = function () {
-
+        var vendortype_details = $scope.data.vendor_type.split('-');
+        
+        this.user.vendor_type_id = vendortype_details[0];
+        this.user.vendor_type = vendortype_details[1];
+        
         if (Object.keys(this.user).length < 8) {
             $scope.message = "Please enter all the fields!";
             $scope.err = '1';
@@ -102,6 +113,7 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
             if (this.user.password == this.user.cpassword) {
                 $scope.pass_msg = '';
                 $scope.err = '0';
+                console.log(this.user);
                 Users.homeadd(this.user).then(function (res) {
                     console.log(res);
                     if (res.status == true) {
@@ -121,7 +133,7 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
                             console.log(res);
                             if (res.status == true) {
                                 alert('Verification code has been sent your mobile number.')
-                                $window.location.assign('http://hunny-env-1.sfftrpytm8.us-east-1.elasticbeanstalk.com/verifycode')
+                                window.location.assign(window.location.origin+'/verifycode')
                             } else {
                                 $scope.error_msg = res;
                             }
@@ -134,7 +146,6 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
                 $scope.err = '1';
                 $scope.pass_msg = 'Passwords do not match.'
             }
-
         }
     }
 
@@ -157,7 +168,7 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
             console.log(res);
             if (res.status == true) {
                 $scope.success_msg = res.data.message;
-                $window.location.assign('http://hunny-env-1.sfftrpytm8.us-east-1.elasticbeanstalk.com/vendor_process')
+                $window.location.assign(window.location.origin+'/vendor_process')
             } else {
                 $scope.error_msg = res;
             }

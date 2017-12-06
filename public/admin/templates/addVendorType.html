@@ -43,6 +43,65 @@
                             </div>
                         </div>
                         <div class="box-body">
+                            <label> Services :
+                               <input type="checkbox" ng-model="service_check"  name='service_check'> 
+                          </label>
+                          <label  ng-show="service_check == true" > Service type :
+                               <input type="checkbox" ng-model="type_check"  name='type_check'> 
+                          </label>
+                            
+                            <div ng-if="service_check == true" style="width:50%;">
+                               <input type="input" class="form-control" ng-model="post.services[0].name" placeholder="Service name" name='services' required>
+                           </div>
+                           <div ng-if="service_check == true" style="width:50%;">
+                              <input type="input" class="form-control" ng-model="post.services[0].pricing" placeholder="Service pricing (Ex: Price per hour)" name='services' required>
+                           </div>
+                            <div ng-if="type_check == true" style="width:50%;">
+                               <input type="input" class="form-control" ng-model="post.services[0].type" placeholder="Service type" name='services' >
+                            </div>
+                           <div ng-repeat="(index,field) in fields">
+                                <div ng-if="type_check == true" style="width:50%;">
+                                    <input type="input" class="form-control" ng-model="more_services[index].type" placeholder="Service Type (Ex: Maximum Guests / Vegetarian )" name='services'>
+                                </div>
+                                <div style="width:50%;">
+                                    <input ng-if="type_check != true" type="text" ng-model="more_services[index].pricing" class="form-control" placeholder="Service pricing (Ex: Price per hour)" required>
+                                    <input ng-if="type_check == true" type="text" ng-model="more_services[index].pricing" class="form-control" placeholder="Service quantity/number (Ex: No. of guests)" required>
+                                </div> 
+                                <div style="width:50%;float: left;">
+                                    <input type="text" ng-model="more_services[index].name" class="form-control" placeholder="Service name" required>
+                                 </div> 
+                               <div class="add-more-admin">
+                                   <button ng-if="fields.length-1 == index" class="add-more" type='button' ng-click="removeservice()" >Remove</button>
+                                 </div>  
+                           </div>
+                           <button ng-if="service_check == true" class="add-more" type='button' ng-click="additionalservices()" >Add more</button>
+                        </div>
+                        <div class="box-body">
+                          <label> Add-ons :
+                               <input type="checkbox" ng-model="addon_check"  name='addon_check'> 
+                          </label>
+                          <input ng-if="addon_check == true" type="input" class="form-control" ng-model="post.addons" placeholder="Seperate by coma (Travel, Air Brush, Custom designing)" name='services' required>
+                         
+                        </div>
+                        <div class="box-body">
+                          <label> Highlights :
+                               <input type="checkbox" ng-model="highlight_check"  name='highlight_check'> 
+                          </label>
+                          <input ng-if="highlight_check == true" type="input" class="form-control" ng-model="post.highlights" placeholder="Seperate by coma (Travel, Air Brush, Custom designing)" name='services' required>
+                         
+                        </div>
+                        <div class="box-body">
+                          <label> Allow custom add-ons :
+                               <input type="checkbox" ng-model="post.more_addons"  name='more_addon'> 
+                          </label>
+                          <label> Allow custom highlights :
+                               <input type="checkbox" ng-model="post.more_highlights"  name='more_highlights'> 
+                          </label>
+                          <label> Allow multiple selection for 'Vendor Subtypes' :
+                               <input type="checkbox" ng-model="post.multiple"  name='multiple'> 
+                          </label>
+                        </div>
+                        <div class="box-body">
                           <label> Allow user to add custom 'Vendor Subtype' under this vendor type :
                                <input type="checkbox" ng-model="post.others"  name='multiple'> 
                           </label>

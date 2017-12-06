@@ -19,7 +19,6 @@ module.exports = function(apiRouter){
                 post.title = req.body.title;
                 post.vendortype = req.body.vendortype;
                 post.vendortype_id = req.body.vendortype_id;
-                post.multiple = req.body.multiple;
                
                 console.log(post)
                 Vendor_subtype.find({'title':post.title},function(error,post_value){

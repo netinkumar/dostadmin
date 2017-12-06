@@ -163,7 +163,7 @@ usersModule.service('Users', function($http) {
                 // return the new post
                 return res.data;
             }).catch(function(err) {
-                console.error('Something went wrong adding the post!');
+                console.error('Something went wrong!');
                 console.error(err);
                 return err;
             });

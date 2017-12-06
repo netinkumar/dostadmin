@@ -1,5 +1,5 @@
 var Vendortype = require('../models/vendortype');
-
+var Vendor_subtype = require('../models/vendor_subtype');
 // Posts API
 module.exports = function(apiRouter){
 	
@@ -18,6 +18,12 @@ module.exports = function(apiRouter){
 		var post = new Vendortype();
 		post.title = req.body.title;
                 post.others = req.body.others;
+                post.multiple = req.body.multiple;
+                post.services = req.body.services;
+                post.addons = req.body.addons;
+                post.more_addons = req.body.more_addons;
+                post.highlights = req.body.highlights;
+                post.more_highlights = req.body.more_highlights;
                 Vendortype.find({'title':post.title},function(error,post_value){
                     if(error){
                         return res.send(error)
@@ -63,14 +69,23 @@ module.exports = function(apiRouter){
 		});
 	});
 
-	// delete a post
-	apiRouter.delete('/vendortypes/:id', function(req, res){
+	// delete a type
+	apiRouter.post('/vendortypes/delete', function(req, res){
 		Vendortype.remove({
-			_id: req.params.id
+			_id: req.body.id
 		}, function(err, post){
-			if(err) res.send(err);
-
-			res.json({ message: 'Post deleted!' });
+			if(err) {
+                           res.send({status: true, message:'Vendor type could not be deleted.',error: err}); 
+                        } else {
+                            Vendor_subtype.remove({vendortype_id : req.body.id}, function(err, post){
+                              if(err) {
+                                res.send({status: true, message:'Vendor type was delete but its subvendors could not be deleted.',error: err}); 
+                              } else {
+                                res.json({status: true, message: 'Vendor type deleted successfully!' });
+                              }
+                            })  
+                        }
+			
 		})
 	});
 };

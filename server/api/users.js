@@ -122,70 +122,44 @@ module.exports = function(apiRouter, passport, transporter,userupload,twilio,upl
     });
     
     apiRouter.post('/users/home', function(req, res) {
-         User.findOne({'phone': req.body.phone },function(err,user){
-             if(user){
-                      res.send({'status':false,'message':"Phone Number already exists with email."});
-                 }else{
-                     console.log(req.body.vendor_type);
-            User.register(new User({
-            name: req.body.name,
-            company_name: req.body.company_name,
-//            email: req.body.email,
-            phone:req.body.phone,
-            address:req.body.address,
-            location:req.body.location,
-            find_us:req.body.find_us,
-            status: 1,
-            role: req.body.role,
-            vendor_type:req.body.vendor_type,
-            friend_invitcode:req.body.friend_invitcode
-             }), req.body.password, function(err, usr) {
-            if (err) {
-                console.log("bbbbb");
-                
-               // console.error(err.message);
-                res.send(err.message);
-            } else {
-                var test=usr._id+usr.company_name;
-               console.log(test.substr(13, 4));
-                usr.invitecode= test.substr(13, 4);
-                usr.save(function(err) {
-//                if (err){
-//                    res.send(err);}else{
-//                res.json({'status':true,'message':'User updated!'});
-//                    }
+        User.findOne({'phone': req.body.phone },function(err,user){
+            if(user){
+                res.send({'status':false,'message':"Phone number already registered with us."});
+            }else{
+                console.log(req.body.vendor_type);
+                User.register(new User({
+                    name: req.body.name,
+                    company_name: req.body.company_name,
+                    phone:req.body.phone,
+                    address:req.body.address,
+                    location:req.body.location,
+                    find_us:req.body.find_us,
+                    status: 1,  //will change from admin
+                    role: req.body.role,
+                    vendor_type:req.body.vendor_type,
+                    vendor_type_id:req.body.vendor_type_id,
+                    friend_invitcode:req.body.friend_invitcode
+                }), req.body.password, function(err, usr) 
+                { 
+                  if (err){  
+                       res.send(err.message); 
+                  } else {
+                    var test=usr._id+usr.company_name;
+                    console.log(test.substr(13, 4));
+                    usr.invitecode= test.substr(13, 4);
+                    usr.save(function(err) {
+                    // if (err){
+                    // res.send(err);}else{
+                    // res.json({'status':true,'message':'User updated!'});
+                    //}
                     });
-                 res.send({'status':true,'message':"You have successfully registered.",'data':usr});
-               // res.send({'status':true,'message':"You have successfully registered.",'data':usr});
-                    
-                //res.send("You have successfully registered");
-               // console.error(user);
-                /*host = req.get('host');//remember the server (i.e host) address
-                link = "http://" + req.get('host') + "/verify?id=" + usr._id;//create a url of the host server
-                var mailOptions = {
-                    from: 'simerjit@avainfotech.com',
-                    to: usr.email,
-                    subject: 'Welcome To DOST',
-                    html: "Hello " + usr.email + ",<br> Please Click on the link to verify.<br><a href=" + link + ">Click here to verify</a>"
-                };
-                transporter.sendMail(mailOptions, function(error, info) {
-                   
-                    if (error) {
-                        res.send(error);
-                    } else {
-                        res.send({'status':true,'message':"You have successfully registered.Please verify your email!",'data':usr});
-                    }
-                });*/
-               
-            }
-
-        });
-                 }
-          
-             
-         });
-        
+                    res.send({'status':true,'message':"You have successfully registered.",'data':usr});
+                  }
+                });
+            } 
+        }); 
     });
+    
     apiRouter.post('/users/forgetpass', function (req, res) {
         User.findOne({ 'email': req.body.email }).select('+salt +hash').exec(function (err, usr) {
             if (usr) {
@@ -712,19 +686,13 @@ module.exports = function(apiRouter, passport, transporter,userupload,twilio,upl
          
   
 apiRouter.post('/users/checkcode', function (req, res) {
-    console.log('jmnjm');
-    console.log(req.body);
-    console.log("test");
     User.findById({ '_id': req.body.id }, function (err, user) {
         if (err) {
             res.json({ 'status': false, 'message': err });
         } else {
-            console.log(user);
-            console.log("bbbb");
             var options = {
                 url: 'https://api.authy.com/protected/json/phones/verification/check?api_key=2BdppFFx4ZU4301BQiEvCKy1jbX3VeMP&phone_number=' + user.phone + '&country_code=91&verification_code=' + req.body.code
             };
-
             function callback(error, response, body) {
                 if (!error && response.statusCode == 200) {
                     console.log(body);
@@ -744,7 +712,6 @@ apiRouter.post('/users/checkcode', function (req, res) {
                     res.json({ 'status': false, 'message': 'Incorrect Verification Code' });
                 }
             }
-
             request(options, callback);
         }
 

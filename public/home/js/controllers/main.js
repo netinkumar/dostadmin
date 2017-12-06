@@ -409,8 +409,8 @@ app.controller('ForgetCtrl', function ($scope, $timeout, Users, $window, $rootSc
             var divider = parseInt(res.data.length * 0.5);
             var first = res.data.slice(0,divider);
             var second = res.data.slice(divider);
-            $rootScope.allvendortypes1 = first;
-            $rootScope.allvendortypes2 = second;
+            $scope.allvendortypes1 = first;
+            $scope.allvendortypes2 = second;
             console.log(first, second)
          } else {
             alert("Could not load the page properly. Please reload.")

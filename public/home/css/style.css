@@ -2712,3 +2712,9 @@ h5.base {
     color: rgb(177, 61, 61);
     background-color: rgb(255, 255, 255);
 }
+
+.add-more-admin {
+	width: 50%;
+	float: left;
+	overflow: hidden;
+}
