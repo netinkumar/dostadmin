@@ -427,67 +427,37 @@ module.exports = function(apiRouter, passport, transporter,userupload,twilio,upl
             if (err) {
                 res.json({ 'status': false, 'message': err });
             } else {
-                console.log(user);
-                console.log(req.body.phone);
-                console.log("babita");
                 if (req.body.phone == undefined) {
-                    console.log("if");
                     req.body.phone = user.phone;
                 } else {
-                    console.log("else");
                     req.body.phone = req.body.phone;
                 }
                 if (user.phone == req.body.phone) {
-                    console.log("match");
                     user.establishment_year = req.body.establishment_year;
-                    user.eworking_hours = req.body.eworking_hours;
-                    user.sworking_hours = req.body.sworking_hours;
-                    user.facebook_username = req.body.facebook_username;
-                    user.twitter_username = req.body.twitter_username;
-                    user.instagram_username = req.body.instagram_username;
-                    user.location = req.body.location;
-                    user.email = req.body.email;
-                    user.discount_amount = req.body.discount_amount;
-                    user.effective_date = req.body.effective_date;
-                    user.product_detail = req.body.product_detail;
-                    user.awards = req.body.awards;
-                    user.minimum_guest = req.body.minimum_guest;
-                    user.maximum_guest = req.body.maximum_guest;
-                    user.company_name = req.body.company_name;
-                    user.vendor_type = req.body.vendor_type;
-                    user.phone = req.body.phone;
-                    user.about_us = req.body.about_us
-                    user.gallery_image = req.body.gallery
-                    if(!req.body.about_us){
-                         user.about_us = '';
-                    }
-                    if (req.body.services) {
-                        user.services = JSON.parse(req.body.services)
-                    }
-                    if (req.body.price_per_plate) {
-                        user.price_per_plate = JSON.parse(req.body.price_per_plate);
-                    }
-                    if (req.body.additionalservices) {
-                        user.additionalservices = JSON.parse(req.body.additionalservices)
-                    }
-                    user.addon = JSON.parse(req.body.addon);
-                    user.highlights = JSON.parse(req.body.highlights);
-                    user.discount = JSON.parse(req.body.discount);
-                    if(user.gallery_image){
-                         user.gallery_image = JSON.parse(req.body.gallery);
-                    }
-                   
-                    if (req.body.additional_addon.length > 0) {
-                        user.additional_addon = JSON.parse(req.body.additional_addon);
-                    }
-                    if (req.body.additional_highlights.length > 0) {
-                        user.additional_highlights = JSON.parse(req.body.additional_highlights);
-                    }
-                    if (req.body.additional_discounts != 'undefined') {
-                        user.additional_discounts = JSON.parse(req.body.additional_discounts);
-                    }
-                    console.log(req.body);
-                    console.log('test');
+                    user.start_hours=req.body.start_hours;
+                    user.end_hours=req.body.end_hours;
+                    user.facebook_username=req.body.facebook_username
+                    user.twitter_username=req.body.twitter_username
+                    user.instagram_username=req.body.instagram_username
+                    user.location=req.body.location
+                    user.email=req.body.email
+                    user.discount=req.body.discount
+                    user.discount_amount=req.body.discount_amount
+                    user.effective_date=req.body.effective_date
+                    user.product_detail=req.body.product_detail
+                    user.awards=req.body.awards
+                    user.vendor_type =req.body.vendor_type
+                    user.vendor_type_id =req.body.vendor_type_id
+                    user.company_name =req.body.company_name
+                    user.about_us =req.body.about_us
+                    user.gallery=req.body.gallery
+                    user.additional_addon=req.body.additional_addon
+                    user.addon=req.body.addon
+                    user.highlights=req.body.highlights
+                    user.additional_highlights=req.body.additional_highlights
+                    user.additional_services=req.body.additional_services
+                    user.services=req.body.services
+                    user.subvendortypes = req.body.subvendortypes
                     user.save(function (err1) {
                         if (err1) {
                             res.json({ 'status': false, 'message': err1 });
@@ -498,7 +468,8 @@ module.exports = function(apiRouter, passport, transporter,userupload,twilio,upl
                         }
                     });
                 } else {
-
+                    
+                    // not worked in this part yet
                     console.log("mismatch");
                     user.establishment_year = req.body.establishment_year;
                     user.eworking_hours = req.body.eworking_hours;
@@ -573,84 +544,7 @@ module.exports = function(apiRouter, passport, transporter,userupload,twilio,upl
     });  
 
 //end
-
-
-
-    // old
-//     apiRouter.post('/users/savebasicinfo', function(req, res) {
-//         console.log('jmnjm');
-//         console.log(req.body);
-//         console.log("test");
-//         User.findById({'_id':req.body.id}, function(err, user) {
-           
-//                if(err){
-//                       res.json({'status':false,'message': err});
-//                      }else{
-//                //   console.log(req.body.additional_highlights);
-//                    // console.log(req.body.additional_addon);
-//               //      console.log(JSON.parse(req.body.additionalservices));
-                    
-//               //console.log(JSON.parse(req.body.price_per_plate));
-//                console.log('returned User')
-//               // console.log(req.body.additional_discounts);
-//                console.log("babita")
-//              //   user.phone = req.body.phone;
-//                 user.establishment_year = req.body.establishment_year;
-//                 user.working_hours = req.body.working_hours;
-//                 user.facebook_username = req.body.facebook_username;
-//                 user.twitter_username = req.body.twitter_username;
-//                 user.instagram_username = req.body.instagram_username;
-//                 user.location = req.body.location;
-//                 user.email = req.body.email;
-//                 user.discount_amount = req.body.discount_amount;
-//                 user.effective_date = req.body.effective_date;
-//                 user.product_detail = req.body.product_detail;
-//                 user.awards = req.body.awards;
-//                 user.minimum_guest= req.body.minimum_guest;
-//                 if(req.body.services){
-//                 user.services=JSON.parse(req.body.services)
-//                 }
-//                    if(req.body.price_per_plate){
-//                 user.price_per_plate=JSON.parse(req.body.price_per_plate);
-//                   }
-//                  if(req.body.additionalservices){
-//                    user.additionalservices=JSON.parse(req.body.additionalservices)
-//                  }
-// //                if(req.body.addon.length>0){
-//                 user.addon = JSON.parse(req.body.addon);
-              
-// //                  }
-// //               if(req.body.highlights.length>0){
-//                 user.highlights = JSON.parse(req.body.highlights);
-// //                  }
-// //               if(req.body.discount.length>0){
-//                  user.discount =JSON.parse(req.body.discount);
-// //                  }
-// //               if(req.body.gallery.length>0){
-//                        user.gallery_image=JSON.parse(req.body.gallery);
-// //               }
-//                 if(req.body.additional_addon.length>0){
-//                       user.additional_addon=JSON.parse(req.body.additional_addon);
-//                }
-//                 if(req.body.additional_highlights.length>0){
-//                     user.additional_highlights=JSON.parse(req.body.additional_highlights);
-//                }
-//                if(req.body.additional_discounts !='undefined'){
-//                      user.additional_discounts=JSON.parse(req.body.additional_discounts);
-//                }
-//                //      user.addon={ thing: 'i want' } ;
-//                 user.save(function(err1) {
-//                     if (err1){
-//                      res.json({'status':false,'message': err1});
-//                         //res.send(err);
-//                     }else{
-//                         res.json({'status':true,'message':'User updated!','data':user});
-//                     }
-//                 })
-//             } 
-            
-//         });
-//     });  
+  
 //    apiRouter.post('/upload', function(req, res) {
 //        //console.log(req.body);
 //        

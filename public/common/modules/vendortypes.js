@@ -68,6 +68,20 @@ contactsModule.service('Vendortypes', function($http) {
                 return err;
             });
         },
+        getvendorbytype: function(id) {
+            return $http({
+                method: 'post',
+                url: '/api/vendortypes/typebyid',
+                data: id
+            }).then(function(res) {
+                // return the new post
+                return res.data;
+            }).catch(function(err) {
+                console.error('Something went wrong adding the post!');
+                console.error(err);
+                return err;
+            });
+        }
         
     };
 });

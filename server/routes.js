@@ -39,8 +39,10 @@ var mailOptions = {
     text: 'That was easy!'
 };
 aws.config.update({
-    secretAccessKey: 'u47Z3DwzitC5TLfsUk11ynJM8+8n5fARjJ5D86d0',
-    accessKeyId: 'AKIAJ3I4K353YIF52FNQ'
+    secretAccessKey: '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',
+    accessKeyId: 'AKIAI7EA6VN3SRTR34ZA'
+    //old 'AKIAJ3I4K353YIF52FNQ'
+    //simerjit 'AKIAI7EA6VN3SRTR34ZA'
 });
 
 var s3 = new aws.S3({

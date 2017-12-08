@@ -44,12 +44,12 @@ module.exports = function(apiRouter){
 		
 	});
 
-	// get a single post
-	apiRouter.get('/vendortypes/:id', function(req, res){
-		Vendortype.findById(req.params.id, function(err, post){
-			if (err) res.send(err);
+	// get a single vendor_type's details
+	apiRouter.post('/vendortypes/typebyid', function(req, res){
+		Vendortype.findById(req.body.id, function(err, post){
+			if (err) res.json({status:false, message:'Could not fetch the details.',error:err});
 
-			res.json(post);
+			res.json({status:true, data:post});
 		});
 	});
 

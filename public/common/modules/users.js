@@ -64,7 +64,7 @@ usersModule.service('Users', function($http) {
                 return err;
             });
         },
-           chnagepass: function(newUser) {
+        chnagepass: function(newUser) {
             return $http({
                 method: 'post',
                 url: '/api/users/changepass',
@@ -109,7 +109,6 @@ usersModule.service('Users', function($http) {
 
         },
         update: function(usr) {
-
             return $http({
                 method: 'post',
                 url: '/api/editusrID',
@@ -195,7 +194,7 @@ usersModule.service('Users', function($http) {
                 console.error(err);
                 return err;
             });
-        }, sigleuser: function(id) {
+        }, sigleuser: function(id) {  
             return $http({
                 method: 'post',
                 url: '/api/users/singleuser',

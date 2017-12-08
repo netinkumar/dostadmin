@@ -132,7 +132,7 @@ app.controller('VendorSignupCtrl', function ($scope, Users, $timeout, $state, Ve
                         Users.sendcode(postdata).then(function (res) {
                             console.log(res);
                             if (res.status == true) {
-                                alert('Verification code has been sent your mobile number.')
+                                alert('Verification code has been sent to your mobile number.')
                                 window.location.assign(window.location.origin+'/verifycode')
                             } else {
                                 $scope.error_msg = res;
@@ -357,19 +357,64 @@ app.controller('changepasswordCtrl', function ($scope, $timeout, Users, $window,
     }
 })
 
-.controller('VendorProcessCtrl', function ($scope, Users, $state, $rootScope, $window) {
-        // $rootScope.$emit('rootScope:emit', 'Emit!')
-       
-       // $rootScope.currentUser = JSON.parse($window.sessionStorage.getItem('user'));
+.controller('VendorProcessCtrl', function ($scope, Users, $state,Vendortypes,Vendor_subtypes, $rootScope, $window) {
+      
+      
+        $scope.user = {}; //used
+        $scope.addons = [];  // used
+        $scope.moreAddon = []; //used
+        $scope.highlights = []; //used
+        $scope.moreHigh = []; //used
+        $scope.services = []; //used
+        $scope.highlights_to_send = []; //used
+        $scope.data = {}; //used
+        $scope.data1 = {}; //used for highlights
+        $scope.gallary = []; //used
+        $scope.loading = false; //used
+        $scope.fields = []; //used 
+        $scope.discount = '2'; //used
+        $scope.showdiscount = 1; // show input on entering the page
+        $scope.custom_dis = 0; // used
+        $scope.disc = {}; //used
+        $scope.subvendortype = {};
+        $scope.subvendortype_to_send = [];
+        
         $rootScope.user_id = JSON.parse($window.sessionStorage.getItem('user'))._id;
-        $rootScope.vendor_type = JSON.parse($window.sessionStorage.getItem('user')).vendor_type;
+        $rootScope.vendor_type = JSON.parse($window.sessionStorage.getItem('user')).vendor_type; 
+        $rootScope.vendor_type_id = JSON.parse($window.sessionStorage.getItem('user')).vendor_type_id;
         $rootScope.company_name = JSON.parse($window.sessionStorage.getItem('user')).company_name;
         $rootScope.phone = JSON.parse($window.sessionStorage.getItem('user')).phone;
-        console.log($rootScope.vendor_type)
+    
         $scope.fb_link = 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwedding-dost.us-east-1.elasticbeanstalk.com%2Finvitationcode%3Fcode%3D'+$rootScope.user_id
         $scope.google_link = 'https://plus.google.com/share?url=http%3A%2F%2Fwedding-dost.us-east-1.elasticbeanstalk.com%2Finvitationcode%3Fcode%3D'+$rootScope.user_id
-        //http://wedding-dost.us-east-1.elasticbeanstalk.com/invitationcode?code=" + userid
-        //http%3A%2F%2Fwedding-dost.us-east-1.elasticbeanstalk.com%2Finvitationcode%3Fcode%3D
+      
+        $scope.getsinglevendortype = function(){
+            Vendortypes.getvendorbytype({id:$rootScope.vendor_type_id}).then(function(res){
+                console.log(res);
+                $scope.highlights = [];
+                $scope.services = [];
+                $scope.all_typedetails = res.data;
+                $scope.demoPlaceholder = $scope.all_typedetails.services[0];
+                for(let i in $scope.all_typedetails.services){
+                    $scope.services.push({title : $scope.all_typedetails.services[i].name, pricing: $scope.all_typedetails.services[i].pricing})
+                }
+                var res_addons = $scope.all_typedetails.addons.split(',');
+                angular.forEach(res_addons, function(value, key) {
+                    $scope.addons.push({title:value, price :''})
+                });
+                console.log($scope.addons)
+                var res_highlights = $scope.all_typedetails.highlights.split(',');
+                angular.forEach(res_highlights, function(value, key) {
+                    $scope.highlights.push({title:value, price :''})
+                });
+            })
+            Vendor_subtypes.subByvendors({id : $rootScope.vendor_type_id}).then(function(res){
+                console.log(res);
+                $scope.subvendortype = res.data;
+            })
+        }
+        $scope.getsinglevendortype();
+        
         // map options starts
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(geoSuccess, err);
@@ -469,24 +514,6 @@ app.controller('changepasswordCtrl', function ($scope, $timeout, Users, $window,
         // map options end
 
 
-
-        $scope.user = {};
-        $scope.addon = {};
-        $scope.data = {};
-        $scope.data1 = {};
-        $scope.gallary = [];
-        $scope.loading = false;
-        $scope.fields = [];
-        $scope.moreAddon = [];
-        $scope.moreHigh = [];
-        $scope.discount = '2';
-        $scope.showdiscount = 1; // show input on entering the page
-        $scope.custom_dis = 0; //
-        $scope.disc = {};
-        // bridal //groom
-        $scope.bridal = {}; //for highlights
-        $scope.groom = {}; // for addons
-
         $scope.additionalservices = function () {
             $scope.fields.push(Math.random());
         }
@@ -497,16 +524,16 @@ app.controller('changepasswordCtrl', function ($scope, $timeout, Users, $window,
                 $scope.loading = false;
                 if (res) {
                     $scope.imgshow = res[0].location;
-                    console.log($scope.imgshow)
+                    console.log($scope.imgshow);
                     $scope.gallary.push({ 'image': $scope.imgshow });
-                    console.log($scope.gallary)
+                    console.log($scope.gallary);
                 }
             });
         };
         $scope.removeImage = function (index) {
-            console.log(index)
+            console.log(index);
             $scope.gallary.splice(index, 1);
-            console.log($scope.gallary)
+            console.log($scope.gallary);
         }
         $scope.add_addon = function () {
             var title = $scope.data.more_title;
@@ -514,132 +541,71 @@ app.controller('changepasswordCtrl', function ($scope, $timeout, Users, $window,
             var newadds = {
                 title: title,
                 price: price
-            }
-            console.log(newadds)
-            if (price != undefined  && price != '') {
+            };
+            console.log(newadds);
+            if (price != undefined  && price != ''){
                 if (title != undefined && title != ''){
-
                  $scope.moreAddon.push(newadds); 
-                   
-                    $scope.data = {};
+                 $scope.data = {};
                 } else {
-                      alert('Please enter a value')
+                      alert('Please enter a title')
                 }
             } else {
-                alert('Please enter a value')
+                alert('Please enter a price')
             }
-            console.log($scope.moreAddon);
-            console.log($scope.addon);
         }
 
-        $scope.check = function (event, model) {
+        $scope.check = function (index,event, model) {
             console.log(event.target.checked, model)
             if (event.target.checked == false) {
-                if (model == 'candid') {
-                    this.groom.candid = '';
-                } else if (model == 'video_editing') {
-                    this.groom.video_editing = '';
-                } else if (model == 'portrait') {
-                    this.groom.portrait = '';
-                } else if (model == 'photo_book') {
-                    this.groom.photo_book = '';
-                } else if (model == 'delivery_addon') {
-                    $scope.groom.delivery_addon = '';
-                } else if (model == 'inhouse_addon') {
-                    $scope.groom.inhouse_addon = '';
-                } else if (model == 'tailoring_addon') {
-                    $scope.groom.tailoring_addon = '';
-                } else if (model == 'designing_addon') {
-                    $scope.groom.designing_addon = '';
-                } else if (model == 'maching_addon') {
-                    $scope.groom.maching_addon = '';
-                } else if (model == 'air_addon') {
-                    $scope.groom.air_addon = '';
-                } else if (model == 'travel_addon') {
-                    $scope.groom.travel_addon = '';
-                } else if (model == 'delivery1_addon') {
-                    $scope.groom.delivery1_addon = '';
-                } else if (model == 'design_addon') {
-                    $scope.groom.design_addon = '';
-                } else if (model == 'demo_addon') {
-                    $scope.groom.demo_addon = '';
-                } else if (model == 'non_veg') {
-                    $scope.groom.non_veg = '';
-                } else if (model == 'healthy_addon') {
-                    $scope.groom.healthy_addon = '';
-                } else if (model == 'hallal_addon') {
-                    $scope.groom.hallal_addon = '';
-                } else if (model == 'onion_addon') {
-                    $scope.groom.onion_addon = '';
-                } else if (model == 'garlic_addon') {
-                    $scope.groom.garlic_addon = '';
-                } else if (model == 'sound_addon') {
-                    $scope.groom.sound_addon = '';
-                } else if (model == 'lighting_addon') {
-                    $scope.groom.lighting_addon = '';
-                } else if (model == 'security_addon') {
-                    $scope.groom.security_addon = '';
-                } else if (model == 'cocktail_addon') {
-                    $scope.groom.cocktail_addon = '';
-                }
-
                 for (let i in $scope.moreAddon) {
                     if ($scope.moreAddon[i].title == model) {
                         $scope.moreAddon.splice(i, 1);
                         console.log($scope.moreAddon);
                     }
                 }
+                for (let i in $scope.addons) {
+                    if ($scope.addons[i].title == model) {
+                        $scope.addons[i].price='';
+                    }
+                }
             }
         };
 
-        $scope.check_high = function (event, model) {
+        $scope.check_high = function (index,event, model) {
             console.log(event.target.checked, model)
-            if (event.target.checked == false) { // bridal is used for highlights
-                if (model == 'candid_high') {
-                    this.bridal.candid_high = '';
-                } else if (model == 'videoediting_high') {
-                    this.bridal.videoediting_high = '';
-                } else if (model == 'portrait_high') {
-                    this.bridal.portrait_high = '';
-                } else if (model == 'photobook_high') {
-                    this.bridal.photobook_high = '';
-                } else if (model == 'travel') {
-                    $scope.bridal.travel1 = ''
-                } else if (model == 'bulkdisc_travel') {
-                    $scope.bridal.bulkdisc_travel = ''
-                } else if (model == 'home_delivery') {
-                    $scope.bridal.home_delivery = ''
-                } else if (model == 'theme_high') {
-                    $scope.bridal.theme_high = '';
-                } else if (model == 'continental_high') {
-                    $scope.bridal.continental_high = '';
-                } else if (model == 'healthy_high') {
-                    $scope.bridal.healthy_high = '';
-                } else if (model == 'allergy_high') {
-                    $scope.bridal.allergy_high = '';
-                } else if (model == 'pool_high') {
-                    $scope.bridal.pool_high = '';
-                } else if (model == 'outdoor_high') {
-                    $scope.bridal.outdoor_high = '';
-                } else if (model == 'nearcity_high') {
-                    $scope.bridal.nearcity_high = '';
-                } else if (model == 'nearaiport_high') {
-                    $scope.bridal.nearaiport_high = '';
-                } else if (model == 'bar_high') {
-                    $scope.bridal.bar_high = '';
-                } else if (model == 'mandap_high') {
-                    $scope.bridal.mandap_high = '';
-                } else if (model == 'dj_high') {
-                    $scope.bridal.dj_high = '';
-                }
+            console.log($scope.highlights[index]);
+            if (event.target.checked == false) { 
                 for (let i in $scope.moreHigh) {
                     if ($scope.moreHigh[i].title == model) {
                         $scope.moreHigh.splice(i, 1);
                         console.log($scope.moreHigh);
                     }
                 }
+                for(let i in $scope.highlights){
+                    if ($scope.highlights[i].title == model) {
+                        $scope.highlights[i].price='';
+                    }
+                }
             }
         };
+        $scope.check_subvendor = function(event, id, title){
+            console.log(title, event.target.checked, id)
+          
+            if (event.target.checked == false) { 
+                for (let i in $scope.subvendortype_to_send) {
+                   if ($scope.subvendortype_to_send[i].subvendortype_id == id) {
+                       $scope.subvendortype_to_send.splice(i, 1);
+                       console.log($scope.subvendortype_to_send)
+                   }
+                }
+                
+            } else {
+               $scope.subvendortype_to_send.push({subvendortype_id : id, title : title});
+               console.log($scope.subvendortype_to_send)
+            }
+        }
+        
         $scope.showDiscountOption = function (value) {
             console.log(value);
              $scope.showdiscount = 1;
@@ -650,44 +616,38 @@ app.controller('changepasswordCtrl', function ($scope, $timeout, Users, $window,
                 $scope.custom_dis = 0;
             }
         };
+        
         $scope.save_discount = function () {
-            console.log($scope.disc)
-            console.log($scope.disc)
-            // if ($scope.disc.days == undefined || $scope.disc.days == '') {
-            //     alert('Please Enter Days')
-            // } else {
-                if ($scope.disc.title == undefined || $scope.disc.title == '') {
-                      alert('Please Enter A Tilte')
+            console.log($scope.disc);
+            if ($scope.disc.title == undefined || $scope.disc.title == '') {
+                alert('Please enter a Tilte')
+            } else {
+                if ($scope.disc.amount == undefined || $scope.disc.amount == '') {
+                     alert('Please enter an amount')
                 } else {
-                    if ($scope.disc.amount == undefined || $scope.disc.amount == '') {
-                         alert('Please Enter An Amount')
-                    } else {
-                        if ($scope.discount == 'custom') {
-                            $scope.user.discount = {
-                                days: $scope.disc.days,
-                                title: $scope.disc.title,
-                                amount: $scope.disc.amount
-                            }
-                        } else {
-                            $scope.user.discount = {
-                                days: $scope.discount,
-                                title: $scope.disc.title,
-                                amount: $scope.disc.amount
-                            }
+                    if ($scope.discount == 'custom') {
+                        $scope.user.discount = {
+                            days: $scope.disc.days,
+                            title: $scope.disc.title,
+                            amount: $scope.disc.amount
                         }
-                        $scope.addeddiscount = 1;
-                        $scope.showdiscount = 0;
-                        $scope.custom_dis = 0;
-                        alert('Added Successfully!')
+                    } else {
+                        $scope.user.discount = {
+                            days: $scope.discount,
+                            title: $scope.disc.title,
+                            amount: $scope.disc.amount
+                        }
                     }
+                    $scope.addeddiscount = 1;
+                    $scope.showdiscount = 0;
+                    $scope.custom_dis = 0;
+                    alert('Added Successfully!')
                 }
-            // }
-           
+            }
         }
 
         $scope.add_highlight = function () {
             $scope.vendordata = {};
-
             var title = $scope.data1.more_title;
             var price = $scope.data1.more_price;
             var newadds = {
@@ -700,322 +660,119 @@ app.controller('changepasswordCtrl', function ($scope, $timeout, Users, $window,
                     $scope.moreHigh.push(newadds);
                     $scope.data1 = {};
                 } else {
-                    alert('Please enter a value')
+                    alert('Please enter a title.')
                 }
             } else {
-                alert('Please enter a value')
+                alert('Please enter a price.')
             }
             console.log($scope.moreHigh);
         }
 
         $scope.vendor_process = function (user) {
-            console.log($scope.groom)
-            console.log($scope.moreHigh);
-            console.log($scope.user.location)
-            if ($scope.user.location != undefined) {
-                $scope.vendordata = {};
-                if ($scope.user.deals == undefined) {
-                    $scope.user.deals = {};
-                    $scope.user.deals.amount = '';
-                    $scope.user.deals.effect_date = '';
-                    $scope.user.deals.pro_details = '';
+            $scope.highlights_to_send=[];
+            var additional_highlights = [];
+            $scope.services_to_send = [];
+            $scope.addons_to_send = [];
+            var additional_addon = [];
+            
+            //highlights start
+            angular.forEach($scope.highlights, function(value, key) {
+                if(value.price != ''){
+                      $scope.highlights_to_send.push(value);
                 }
-                if ($scope.user.facebook_username == undefined){ $scope.user.facebook_username = '' };
-                if ($scope.user.instagram_username == undefined){ $scope.user.instagram_username = '' };
-                if ($scope.user.twitter_username == undefined){ $scope.user.twitter_username = '' };
-                if (this.groom.candid == undefined) {
-                    this.groom.candid = '';
+            });
+            // get custom highlights
+            angular.forEach($scope.moreHigh, function(value, key) {
+                console.log(value);
+                if(value.price != ''){
+                      additional_highlights.push(value);
                 }
-                if (this.groom.video_editing == undefined) {
-                    this.groom.video_editing = '';
+            });
+            // highlights ends
+            // services starts
+            angular.forEach($scope.services, function(value, key) {
+                console.log(value);
+                if(value.price == undefined || value.price == ''){
+                      //nothing happens
+                } else {
+                    $scope.services_to_send.push(value);
                 }
-                if (this.groom.portrait == undefined) {
-                    this.groom.portrait = '';
+            });
+            //services ends
+            //addon starts
+             angular.forEach($scope.addons, function(value, key) {
+                if(value.price != ''){
+                      $scope.addons_to_send.push(value);
                 }
-                if (this.groom.photo_book == undefined) {
-                    this.groom.photo_book = '';
+            });
+            angular.forEach($scope.moreAddon, function(value, key) {
+                console.log(value);
+                if(value.price != ''){
+                      additional_addon.push(value);
                 }
-                if (this.bridal.candid_high == undefined) {
-                    this.bridal.candid_high = '';
+            });
+            //addon ends
+            
+            //check other variable
+            if($scope.user.deals == undefined){
+                $scope.user.deals={
+                    effect_date : '',
+                    amount : '',
+                    pro_details :''
                 }
-                if (this.bridal.videoediting_high == undefined) {
-                    this.bridal.videoediting_high = '';
-                }
-                if (this.bridal.portrait_high == undefined) {
-                    this.bridal.portrait_high = '';
-                }
-                if ($scope.user.discount == undefined) {
-                    $scope.user.discount = '';
-                }
-
-                if ($scope.bridal.travel1 == undefined) {
-                    $scope.bridal.travel1 = '';
-                }
-                if ($scope.bridal.design == undefined) {
-                    $scope.bridal.design = '';
-                }
-                if ($scope.bridal.bulkdisc_travel == undefined) {
-                    $scope.bridal.bulkdisc_travel = '';
-                }
-                if ($scope.bridal.home_delivery == undefined) {
-                    $scope.bridal.home_delivery = '';
-                }
-                if ($scope.groom.delivery_addon == undefined) {
-                    $scope.groom.delivery_addon = ''
-                }
-                if ($scope.groom.inhouse_addon == undefined) {
-                    $scope.groom.inhouse_addon = ''
-                }
-                if ($scope.groom.tailoring_addon == undefined) {
-                    $scope.groom.tailoring_addon = ''
-                } if ($scope.groom.designing_addon == undefined) {
-                    $scope.groom.designing_addon = ''
-                } if ($scope.groom.maching_addon == undefined) {
-                    $scope.groom.maching_addon = ''
-                } if ($scope.bridal.theme_high == undefined) {
-                    $scope.bridal.theme_high = '';
-                } if ($scope.groom.air_addon == undefined) {
-                    $scope.groom.air_addon = ''
-                } if ($scope.groom.travel_addon == undefined) {
-                    $scope.groom.travel_addon = ''
-                } if ($scope.groom.delivery1_addon == undefined) {
-                    $scope.groom.delivery1_addon = ''
-                } if ($scope.groom.demo_addon == undefined) {
-                    $scope.groom.demo_addon = ''
-                } if ($scope.groom.design_addon == undefined) {
-                    $scope.groom.design_addon = ''
-                } if ($scope.groom.sound_addon == undefined) {
-                    $scope.groom.sound_addon = '';
-                } if ($scope.groom.lighting_addon == undefined) {
-                    $scope.groom.lighting_addon = '';
-                } if ($scope.groom.security_addon == undefined) {
-                    $scope.groom.security_addon = '';
-                } if ($scope.groom.cocktail_addon == undefined) {
-                    $scope.groom.cocktail_addon = '';
-                } if ($scope.groom.nonveg_addon == undefined) {
-                    $scope.groom.nonveg_addon = ''
-                } if ($scope.groom.healthy_addon == undefined) {
-                    $scope.groom.healthy_addon = ''
-                } if ($scope.groom.hallal_addon == undefined) {
-                    $scope.groom.hallal_addon = ''
-                } if ($scope.groom.onion_addon == undefined) {
-                    $scope.groom.onion_addon = ''
-                } if ($scope.groom.garlic_addon == undefined) {
-                    $scope.groom.garlic_addon = ''
-                } if ($scope.bridal.continental_high == undefined) {
-                    $scope.bridal.continental_high = ''
-                } if ($scope.bridal.allergy_high == undefined) {
-                    $scope.bridal.allergy_high = ''
-                } if ($scope.bridal.healthy_high == undefined) {
-                    $scope.bridal.healthy_high = ''
-                }
-                if ($scope.bridal.pool_high == undefined) {
-                    $scope.bridal.pool_high = ''
-                } if ($scope.bridal.outdoor_high == undefined) {
-                    $scope.bridal.outdoor_high = ''
-                } if ($scope.bridal.nearcity_high == undefined) {
-                    $scope.bridal.nearcity_high = ''
-                } if ($scope.bridal.nearaiport_high == undefined) {
-                    $scope.bridal.nearaiport_high = ''
-                } if ($scope.bridal.bar_high == undefined) {
-                    $scope.bridal.bar_high = ''
-                } if ($scope.bridal.mandap_high == undefined) {
-                    $scope.bridal.mandap_high = ''
-                } if ($scope.bridal.dj_high == undefined) {
-                    $scope.bridal.dj_high = ''
-                }
-                if($scope.user.about_us == undefined){
-                    $scope.user.about_us = '';
-                }
-
-
-                if ($rootScope.vendor_type == 'Photographer') {
-                    $scope.user_addon = {
-                        candid: this.groom.candid,
-                        video_editing: this.groom.video_editing,
-                        portrait: this.groom.portrait,
-                        photo_book: this.groom.photo_book,
-                    }
-
-                    $scope.user_highlight = {
-                        candid_high: this.bridal.candid_high,
-                        videoediting_high: this.bridal.videoediting_high,
-                        portrait_high: this.bridal.portrait_high,
-                        photobook_high: this.bridal.photobook_high,
-                    }
-                } else if ($rootScope.vendor_type == 'Make Up' || $rootScope.vendor_type == 'Bridal Wear' || $rootScope.vendor_type == 'Groomwear') {
-                    $scope.user_highlight = {
-                        travel: $scope.bridal.travel1,
-                        bulkdisc_travel: $scope.bridal.bulkdisc_travel,
-                        home_delivery: $scope.bridal.home_delivery,
-                        design_customization: $scope.bridal.design
-                    }
-                    console.log($scope.user_highlight);
-
-                    if ($rootScope.vendor_type == 'Make Up') {
-                        $scope.user_addon = {
-                            air_brush: $scope.groom.air_addon,
-                            travel: $scope.groom.travel_addon
-                        }
-                    } else if ($rootScope.vendor_type == 'Bridal Wear' || $rootScope.vendor_type == 'Groomwear') {
-
-                        $scope.user_addon = {
-                            delivery: $scope.groom.delivery_addon,
-                            inhouse: $scope.groom.inhouse_addon,
-                            tailoring: $scope.groom.tailoring_addon,
-                            designing: $scope.groom.designing_addon,
-                            maching: $scope.groom.maching_addon
-                        };
-                    }
-                } else if ($rootScope.vendor_type == 'Sangeet Choreographer' || $rootScope.vendor_type == 'Mehandi Artist' || $rootScope.vendor_type == 'Wedding Cake' || $rootScope.vendor_type == 'Wedding Entertainment' || $rootScope.vendor_type == 'Wedding Cards' || $rootScope.vendor_type == 'Wedding Planner' || $rootScope.vendor_type == 'Wedding Decorator') {
-
-                    if ($rootScope.vendor_type == 'Wedding Planner' || $rootScope.vendor_type == 'Wedding Decorator') {
-                        $scope.user_highlight = {
-                            theme_high: $scope.bridal.theme_high,
-                        }
-                    } else {
-                        $scope.user_highlight = {
-                            travel: $scope.bridal.travel1,
-                            bulkdisc_travel: $scope.bridal.bulkdisc_travel,
-                            home_delivery: $scope.bridal.home_delivery,
-                            design_customization: $scope.bridal.design
-                        }
-                    }
-                    $scope.user_addon = '';
-                } else if ($rootScope.vendor_type == 'Wedding Jewellery' || $rootScope.vendor_type == 'Wedding Accessories') {
-                    $scope.user_addon = {
-                        delivery: $scope.groom.delivery_addon,
-                        inhouse: $scope.groom.inhouse_addon,
-                        custom_dis: $scope.groom.tailoring_addon,
-                    };
-                    $scope.user_highlight = {
-                        travel: $scope.bridal.travel1,
-                        bulkdisc_travel: $scope.bridal.bulkdisc_travel,
-                        home_delivery: $scope.bridal.home_delivery,
-                        design_customization: $scope.bridal.design
-                    }
-                } else if ($rootScope.vendor_type == 'Wedding Catering') {
-                    $scope.user_addon = {
-                        non_veg: $scope.groom.nonveg_addon,
-                        healthy: $scope.groom.healthy_addon,
-                        hallal: $scope.groom.hallal_addon,
-                        wo_onion: $scope.groom.onion_addon,
-                        wo_garlic: $scope.groom.garlic_addon,
-                    };
-                    $scope.user_highlight = {
-                        continental: $scope.bridal.continental_high,
-                        allergy: $scope.bridal.allergy_high,
-                        healthy: $scope.bridal.healthy_high
-                    }
-                } else if ($rootScope.vendor_type == 'Wedding Venue') {
-                    $scope.user_addon = {
-                        sound: $scope.groom.sound_addon,
-                        lighting: $scope.groom.lighting_addon,
-                        security: $scope.groom.security_addon,
-                        cocktail: $scope.groom.cocktail_addon,
-                    };
-                    $scope.user_highlight = {
-                        outdoor: $scope.bridal.outdoor_high,
-                        nearcity: $scope.bridal.nearcity_high,
-                        nearairpot: $scope.bridal.nearaiport_high,
-                        bar: $scope.bridal.bar_high,
-                        mandap: $scope.bridal.mandap_high,
-                        dj: $scope.bridal.dj_high,
-                        pool: $scope.bridal.pool_high,
-                    }
-                }
-
-
-                $scope.user.addon = $scope.user_addon;
-                
-                for(let i in $scope.moreAddon){
-                    if($scope.moreAddon[i].$$hashKey){
-                            delete $scope.moreAddon[i].$$hashKey
-                    }
-                    
-                }
-                for(let i in $scope.moreHigh){
-                    if($scope.moreHigh[i].$$hashKey){
-                            delete $scope.moreHigh[i].$$hashKey
-                    }
-                    
-                }
-                for (let i in $scope.gallary) {
-                    if ($scope.gallary[i].$$hashKey) {
-                        delete $scope.gallary[i].$$hashKey
-                    }
-                }
-                $scope.user.additional_addons = $scope.moreAddon;
-              
-                $scope.user.additional_highlight = $scope.moreHigh;
-                $scope.user.highlight = $scope.user_highlight;
-
-                if ($scope.user.additionalservice == undefined) {
-                    $scope.user.additionalservice = '';
-                }
-                var postdata = {
+            }
+            if($scope.user.discount == undefined){
+                $scope.user.discount = '';
+            }
+            console.log($scope.addons);
+            console.log($scope.addons_to_send);
+            console.log(additional_addon)
+            console.log($scope.highlights_to_send);
+            console.log(additional_highlights);
+            console.log($scope.services_to_send);
+            console.log($scope.gallary);
+            console.log($scope.user);
+            var postdata = {
                     id: $rootScope.user_id,
                     establishment_year: $scope.user.establishment_year,
-                    sworking_hours: $scope.user.start_hours,
-                    eworking_hours: $scope.user.end_hours,
+                    start_hours: $scope.user.start_hours,
+                    end_hours: $scope.user.end_hours,
                     facebook_username: $scope.user.facebook_username,
                     twitter_username: $scope.user.twitter_username,
                     instagram_username: $scope.user.instagram_username,
                     location: $scope.user.location,
                     email: $scope.user.email,
+                    discount:JSON.stringify( $scope.user.discount),
                     discount_amount: $scope.user.deals.amount,
                     effective_date: $scope.user.deals.effect_date,
                     product_detail: $scope.user.deals.pro_details,
                     awards: $scope.user.awards,
                     vendor_type : $rootScope.vendor_type,
+                    vendor_type_id : $rootScope.vendor_type_id,
                     phone : $rootScope.phone,
                     company_name : $rootScope.company_name,
                     about_us : $scope.user.about_us,
-                    // maximum_guest: data.value.maxguest,
-                    //  minimum_guest: data.value.minguest,
-                    additional_addon: JSON.stringify($scope.user.additional_addons),
-                    addon: JSON.stringify($scope.user.addon),
-                    highlights: JSON.stringify($scope.user.highlight),
-                    discount:JSON.stringify( $scope.user.discount),
-                    gallery: JSON.stringify(this.gallary),
-                    additional_highlights: JSON.stringify($scope.user.additional_highlight),
-                    //  photo_vedio: JSON.stringify(this.photovedio),
-                    additional_discounts : 'undefined',
-                    // additional_photo_vedio: JSON.stringify(this.items1),
-                    //  additional_discounts: JSON.stringify(this.morediscount),
-                    //  price_per_plate: JSON.stringify(this.price_per_plate),
-                    additionalservices: JSON.stringify($scope.user.additionalservice),
-                    services: JSON.stringify($scope.user.service)
-                }
-
-                // user.addon = JSON.parse(req.body.addon);
-                // user.highlights = JSON.parse(req.body.highlights);
-                // user.discount = JSON.parse(req.body.discount);
-                // user.gallery_image = JSON.parse(req.body.gallery);
-                // if (req.body.additional_addon.length > 0) {
-                //     user.additional_addon = JSON.parse(req.body.additional_addon);
-                // }
-                // if (req.body.additional_highlights.length > 0) {
-                //     user.additional_highlights = JSON.parse(req.body.additional_highlights);
-                // }
-                // if (req.body.additional_discounts != 'undefined') {
-                //     user.additional_discounts = JSON.parse(req.body.additional_discounts);
-
-                console.log(postdata)
-                // return false;
-                Users.saveinfo(postdata).then(function (res) {
+                    gallery: JSON.stringify($scope.gallary),
+                    additional_addon: JSON.stringify(additional_addon), //check
+                    addon: JSON.stringify($scope.addons_to_send), //work
+                    highlights: JSON.stringify($scope.highlights_to_send),
+                    additional_highlights: JSON.stringify(additional_highlights),
+                    additional_services: JSON.stringify($scope.user.additionalservice),
+                    services: JSON.stringify($scope.services_to_send),
+                    subvendortypes : JSON.stringify($scope.subvendortype_to_send)
+            }
+            console.log(postdata);
+            Users.saveinfo(postdata).then(function (res) {
                     console.log(res);
                     if (res.status == true) {
                         $scope.success_msg = res.message;
+                        $scope.error_msg =''
                         alert(res.message)
-                        $window.sessionStorage.clear();
-                        $window.location.assign('http://hunny-env-1.sfftrpytm8.us-east-1.elasticbeanstalk.com/signin')
-                       
                     } else {
                         $scope.error_msg = res;
+                        $scope.success_msg =''
                     }
-                });
-            }
+            });
         }
     })
 
